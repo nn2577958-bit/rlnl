@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>라니 디지털 - 포인트·결제·게임 정책</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+body {
+  min-height:100vh;
+  font-family:'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(15,23,42,.7), rgba(15,23,42,.95)),
+    url('https://cdn.phototourl.com/uploads/2026-02-18-2239f19c-5c7f-4c1e-b1c1-731bf5606151.webp') center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  color:#e5e7eb;
+}
+.container {
+  width:92vw;
+  max-width:960px;
+  padding:24px 24px 22px;
+  background:rgba(15,23,42,.86);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  border:1px solid rgba(148,163,184,.35);
+  box-shadow:0 22px 50px rgba(15,23,42,.9);
+}
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.header-left {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo {
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(148,163,184,.6);
+  box-shadow:0 10px 30px rgba(15,23,42,.7);
+}
+.logo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.title-block { display:flex; flex-direction:column; gap:2px; }
+.site-title { font-size:18px; font-weight:700; letter-spacing:.03em; }
+.site-subtitle { font-size:11px; color:#cbd5f5; opacity:.9; }
+.page-title {
+  margin-top:8px;
+  font-size:20px;
+  font-weight:700;
+}
+.page-sub {
+  margin-top:4px;
+  font-size:12px;
+  color:#9ca3af;
+}
+.terms {
+  margin-top:16px;
+  font-size:12px;
+  line-height:1.7;
+  color:#e5e7eb;
+  max-height:60vh;
+  overflow-y:auto;
+  padding-right:6px;
+}
+.terms h2 {
+  font-size:14px;
+  margin:14px 0 6px;
+  color:#f9fafb;
+}
+.terms p { margin:4px 0; }
+.terms ol, .terms ul { margin:4px 0 4px 18px; }
+.terms li { margin:2px 0; }
+.btn-row {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:16px;
+  font-size:12px;
+}
+.btn {
+  padding:7px 14px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 4px 14px rgba(15,23,42,.8);
+  transition:transform .15s, box-shadow .15s;
+}
+.btn:hover { transform:translateY(-1px);}
+.btn-home { background:linear-gradient(135deg,#0ea5e9,#2563eb); }
+
+@media (max-width:640px){
+  .container{padding:20px 18px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">
+        <img src="https://cdn.phototourl.com/uploads/2026-02-28-90909391-9783-4299-a370-a3766a19e150.png" alt="라니 로고" />
+      </div>
+      <div class="title-block">
+        <div class="site-title">포인트 · 결제 · 게임 정책</div>
+        <div class="site-subtitle">라니 디지털 · 라니 MALL · 말경주 · 블랙잭</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-title">포인트 및 게임 이용 정책</div>
+  <div class="page-sub">포인트 충전·사용, 환불 기준, 게임(말경주·블랙잭) 이용 규정을 정리한 문서입니다.</div>
+
+  <div class="terms">
+    <h2>제1조 (포인트의 성격)</h2>
+    <ol>
+      <li>포인트는 라니 디지털 및 라니 MALL 내에서만 사용 가능한 가상의 점수이며, 법정통화 또는 가상자산이 아닙니다.</li>
+      <li>포인트는 현금, 라이트코인(LTC) 등 어떤 실물 자산으로도 직접 환전·양도·매매할 수 없습니다.</li>
+      <li>포인트는 서비스 내 상품 구매, 게임 참여, 이벤트 참가 등에만 사용됩니다.</li>
+    </ol>
+
+    <h2>제2조 (포인트 충전 및 적립)</h2>
+    <ol>
+      <li>포인트 충전은 디스코드 DM, 계좌 이체, 기타 사전 합의된 방법을 통해 운영자와 개별 협의 후 수동 반영됩니다.</li>
+      <li>포인트 적립 내역은 디스코드 봇 및 로그 채널을 통해 기록되며, 회원은 언제든지 충전/사용 내역을 문의할 수 있습니다.</li>
+      <li>온체인 가상자산(LTC 등)을 직접 연동하여 자동으로 포인트를 충전하는 기능은 제공하지 않습니다.</li>
+    </ol>
+
+    <h2>제3조 (포인트 사용 및 환불)</h2>
+    <ol>
+      <li>이미 사용된 포인트(상품 구매, 디자인·호스팅 작업 진행, 게임 참여 등)에 대해서는 원칙적으로 환불이 불가합니다.</li>
+      <li>잘못된 충전, 중복 결제 등 운영자 측 과실로 인한 문제는 개별 확인 후 포인트 조정 또는 환불을 진행할 수 있습니다.</li>
+      <li>환불 기준, 가능 기간, 절차는 디스코드 공지 및 개별 안내를 우선으로 합니다.</li>
+    </ol>
+
+    <h2>제4조 (게임 - 말경주 · 블랙잭 등)</h2>
+    <ol>
+      <li>말경주, 블랙잭 등 게임은 포인트를 사용하는 엔터테인먼트 기능으로, 실제 도박 서비스가 아닙니다.</li>
+      <li>게임 참여로 획득한 포인트 역시 서비스 내에서만 사용 가능하며, 현금 및 가상자산으로 인출할 수 없습니다.</li>
+      <li>외부 사이트나 불법 도박과 연계하는 행위, 승·패를 이용한 현금 거래, 사설 환전 행위는 엄격히 금지됩니다.</li>
+      <li>게임 시스템 악용, 버그 이용, 자동화(매크로) 사용 등은 계정 제한 및 포인트 회수 사유가 될 수 있습니다.</li>
+    </ol>
+
+    <h2>제5조 (마케팅 및 커뮤니티 관련)</h2>
+    <ol>
+      <li>마케팅 봇, 홍보 메시지 송출 등은 사전 동의된 서버 및 채널에 한하여 진행합니다.</li>
+      <li>특정 불법 사이트, 도박, 음란물, 사기성 서비스 등에 대한 홍보는 일절 허용되지 않으며, 적발 시 즉시 서비스 이용 제한 조치를 취할 수 있습니다.</li>
+    </ol>
+
+    <h2>제6조 (자금세탁 방지 및 법적 준수)</h2>
+    <ol>
+      <li>서비스 제공자는 자금세탁, 불법 도박, 범죄 수익 은닉 등 불법 행위에 이용되지 않도록 합리적인 범위에서 관리하며, 의심스러운 활동이 발견될 경우 거래를 중단하고 관련 정보를 보관할 수 있습니다.</li>
+      <li>필요 시 관련 법령 및 수사기관의 요청에 따라 협조할 수 있습니다.</li>
+    </ol>
+
+    <h2>제7조 (변경 안내)</h2>
+    <p>포인트·결제 및 게임 관련 정책은 서비스 운영 상황과 법령 변화에 따라 변경될 수 있으며, 변경 시 디스코드 공지 및 사이트를 통해 안내합니다.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-home" id="home-btn">🏠 홈으로 돌아가기</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById("home-btn").onclick = () => {
+    // 라니몰 홈 파일 이름에 맞춰서 수정 (home.html 쓰면 거기로)
+    window.location.href = "home.html";
+  };
+</script>
+</body>
+</html>
