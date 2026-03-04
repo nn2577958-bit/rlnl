@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +31,7 @@ body {
   position:relative;
 }
 
-/* 부드럽게 움직이는 네온 안개 (기존값 유지) */
+/* 부드럽게 움직이는 네온 안개 */
 body::before {
   content:'';
   position:fixed;
@@ -43,7 +45,7 @@ body::before {
   z-index:-2;
 }
 
-/* 좀 더 선명하게 보이는 도는 링 */
+/* 도는 링 */
 .bg-orbit {
   position:fixed;
   width:900px;
@@ -57,7 +59,7 @@ body::before {
     rgba(37,99,235,0.32),
     rgba(59,130,246,0.00)
   );
-  opacity:0.65; /* 기존 0.45 → 더 선명하게 */
+  opacity:0.65;
   mix-blend-mode:screen;
   animation:slowOrbit 48s linear infinite;
   z-index:-1;
@@ -70,14 +72,14 @@ body::before {
   background:radial-gradient(circle, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
 }
 
-/* 배경 전체가 물결처럼 천천히 움직이는 효과 */
+/* 배경 전체가 물결처럼 */
 @keyframes bgWave {
   0%   { background-position:0% 50%; }
   50%  { background-position:100% 50%; }
   100% { background-position:0% 50%; }
 }
 
-/* 안개 살짝 이동 */
+/* 안개 이동 */
 @keyframes calmNebula {
   0%,100% { transform:scale(1) translate(0,0); }
   50%     { transform:scale(1.06) translate(-20px, 18px); }
@@ -130,7 +132,7 @@ body::before {
   justify-content:space-between;
 }
 
-/* 왼쪽 문구 그라데이션 + 살짝 빛 */
+/* 왼쪽 문구 */
 .left-brand {
   font-size:20px;
   font-weight:700;
@@ -193,7 +195,7 @@ body::before {
   width:100%;
 }
 
-/* 상단 로고 + 제목 */
+/* 상단 제목/부제 */
 .logo {
   font-size:24px;
   font-weight:800;
@@ -207,7 +209,7 @@ body::before {
   -webkit-text-fill-color:transparent;
 }
 
-/* 네온 그라데이션 안내 문구 */
+/* 네온 안내 문구 */
 .hint {
   font-size:13px;
   font-weight:600;
@@ -435,6 +437,29 @@ input:focus {
     </div>
   </div>
 
+  <!-- 배경 음악 토글 버튼 + 오디오 -->
+  <button id="music-toggle" style="
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    padding:6px 12px;
+    font-size:12px;
+    border-radius:999px;
+    border:none;
+    background:rgba(15,23,42,0.85);
+    color:#e5e7eb;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(15,23,42,0.8);
+    z-index:10;
+  ">
+    🔈 음악 켜기
+  </button>
+
+  <audio id="bg-music" loop>
+    <source src="https://gay-salmon-iv4pvv4oop.edgeone.app/producesplatinum-vlog-hip-hop-483574_[cut_11sec].mp3" type="audio/mpeg">
+    브라우저가 오디오를 지원하지 않습니다.
+  </audio>
+
 <script type="module">
 import { auth } from "./firebase.js";
 import {
@@ -474,6 +499,26 @@ loginBtn.addEventListener("click", async () => {
     btnText.textContent = "Google로 계속";
   }
 });
+
+// ===== 배경 음악 토글 =====
+const bgMusic = document.getElementById("bg-music");
+const musicToggle = document.getElementById("music-toggle");
+
+if (bgMusic && musicToggle) {
+  musicToggle.addEventListener("click", async () => {
+    if (bgMusic.paused) {
+      try {
+        await bgMusic.play();
+        musicToggle.textContent = "🔇 음악 끄기";
+      } catch (e) {
+        console.error("음악 재생 오류:", e);
+      }
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = "🔈 음악 켜기";
+    }
+  });
+}
 </script>
 </body>
 </html>
