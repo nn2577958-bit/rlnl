@@ -129,20 +129,112 @@
       <div class="meta">
         <span class="tag">유저 포인트 보상</span>
         <span class="tag">출석 · 위로금 · 리필 쿨타임</span>
+        <span class="tag">레벨 · 경험치 시스템</span>
       </div>
     </header>
 
     <section>
       <p>
-        이 페이지는 RLNL 시스템의 출석, 일일 위로금, 30분 리필 기능을 정리해 두는 문서입니다.
-        실제 동작은 RLNL 게임 패널의 버튼을 통해 이루어집니다.
+        이 페이지는 RLNL 시스템의 출석, 일일 위로금, 30분 리필, 레벨/경험치 기능을 정리해 두는 문서입니다.
+        실제 동작은 RLNL 게임 패널의 버튼과 <code>/출석</code> 명령어를 통해 이루어집니다.
       </p>
       <div class="note">
-        👉 내부 포인트 테이블 구조나 쿨타임 로직을 나중에 여기에 정리해 두면, 유저용 안내/자기용 참고 문서로 쓰기 좋습니다.
+        👉 내부 포인트/레벨 테이블 구조를 정리해 두면, 나중에 다른 봇이나 패널과 연동할 때 참고용으로 쓰기 좋습니다.
       </div>
     </section>
 
-    <!-- 나중에 상세 내용 채워 넣기 -->
+    <section>
+      <h2>1. 출석 · 레벨/경험치 (<code>/출석</code>)</h2>
+      <p>
+        <code>/출석</code> 명령어는 24시간에 한 번 사용할 수 있는 출석 체크 기능입니다.
+        출석에 성공하면 <strong>1P</strong>와 함께 경험치 <strong>1</strong>이 적립되고, 일정 경험치마다 레벨이 오릅니다.
+      </p>
+      <ul>
+        <li>쿨타임: 24시간 (이전에 찍은 출석 시간 기준).</li>
+        <li>출석 보상: <strong>+1P</strong> (잔액), <strong>+1 EXP</strong>.</li>
+        <li>레벨 업 조건: <code>exp</code>가 <code>next_exp</code> 이상이 되면 레벨 1 상승.</li>
+        <li>레벨 업 시: <code>exp</code>에서 <code>next_exp</code>만큼 차감, <code>next_exp</code>는 1.5배로 증가.</li>
+      </ul>
+      <p>
+        예를 들어 초기에 LV 1, EXP 0 / 10에서 출석 10번을 하면 LV 2가 되며,
+        다음 레벨까지 필요한 경험치는 15로 증가합니다.
+      </p>
+      <div class="block">
+        테이블 컬럼 예시 (casino_users)
+        --------------------------------
+        level      INTEGER DEFAULT 1   -- 현재 레벨
+        exp        INTEGER DEFAULT 0   -- 현재 경험치
+        next_exp   INTEGER DEFAULT 10  -- 다음 레벨까지 필요한 경험치
+      </div>
+      <div class="note">
+        👉 출석 임베드에는 현재 잔액, 레벨, 경험치 진행도(%)와 다음 레벨 정보가 함께 표시됩니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 일일 위로금 (💸 버튼)</h2>
+      <p>
+        RLNL 게임 패널의 <strong>💸 일일 위로금</strong> 버튼은 하루에 한 번 사용할 수 있는 기본 포인트 지급 기능입니다.
+        잔액이 부족한 유저도 꾸준히 접속만 하면 게임을 이어갈 수 있도록 설계되어 있습니다.
+      </p>
+      <ul>
+        <li>지급 포인트: 기본 <strong>1000P</strong>.</li>
+        <li>쿨타임: 24시간.</li>
+        <li>안내 메시지: 남은 시간은 "N시간 M분" 형태로 에페메랄(개인에게만 보이는) 메시지로 안내.</li>
+      </ul>
+      <div class="block">
+        사용 시 처리
+        ------------
+        1) 현재 시간(now)과 last_daily 비교
+        2) 쿨타임이 지났으면 balance += 1000, last_daily = now
+        3) 변경 내용은 casino_users 테이블에 업데이트
+      </div>
+    </section>
+
+    <section>
+      <h2>3. 30분 리필 (🔁 버튼)</h2>
+      <p>
+        <strong>🔁 30분 리필</strong> 버튼은 30분마다 소량의 포인트를 채워주는 기능입니다.
+        일일 위로금보다 단위는 작지만, 자주 접속하는 유저에게는 꾸준한 보상이 됩니다.
+      </p>
+      <ul>
+        <li>지급 포인트: 기본 <strong>200P</strong>.</li>
+        <li>쿨타임: 30분.</li>
+        <li>안내 메시지: 남은 시간은 "N분 S초" 형태로 에페메랄 메시지로 안내.</li>
+      </ul>
+      <div class="block">
+        사용 시 처리
+        ------------
+        1) 현재 시간(now)과 last_refill 비교
+        2) 쿨타임이 지났으면 balance += 200, last_refill = now
+        3) 변경 내용은 casino_users 테이블에 업데이트
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 포인트/레벨 저장 구조</h2>
+      <p>
+        RLNL 포인트와 출석·레벨 정보는 <code>casino_users</code> 테이블에 저장됩니다.
+        서버별/유저별 복합 기본키를 사용해, 여러 서버에서 같은 유저가 다른 잔액과 레벨을 가질 수 있습니다.
+      </p>
+      <div class="block">
+        CREATE TABLE IF NOT EXISTS casino_users (
+          guild_id      INTEGER,
+          user_id       INTEGER,
+          balance       INTEGER DEFAULT 1000,
+          last_daily    INTEGER DEFAULT 0,
+          level         INTEGER DEFAULT 1,
+          exp           INTEGER DEFAULT 0,
+          next_exp      INTEGER DEFAULT 10,
+          last_checkin  INTEGER DEFAULT 0,
+          last_refill   INTEGER DEFAULT 0,
+          PRIMARY KEY (guild_id, user_id)
+        );
+      </div>
+      <div class="note">
+        👉 이 구조를 기반으로 나중에 랭킹, 누적 출석 일수, 레벨 보상 같은 기능도 쉽게 확장할 수 있습니다.
+      </div>
+    </section>
   </div>
 </body>
 </html>
