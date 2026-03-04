@@ -16,7 +16,10 @@
         "Segoe UI Emoji",
         "Noto Color Emoji",
         sans-serif;
-      background: #020617;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,0.15), transparent 55%),
+        #020617;
       color: #e5e7eb;
     }
     .wrap {
@@ -37,6 +40,7 @@
     header h1 {
       font-size: 28px;
       margin: 0 0 4px;
+      text-shadow: 0 0 12px rgba(59,130,246,0.3);
     }
     header .meta {
       font-size: 14px;
@@ -120,12 +124,28 @@
     a:hover {
       text-decoration: underline;
     }
+
+    .tabs-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tab-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="path">배포봇 v1 &gt; 설정 &gt; /setup</div>
+      <div class="path">라니봇 v1 &gt; 설정 &gt; /setup</div>
       <h1>/setup 시작하기</h1>
       <div class="meta">
         <code>/setup</code>
@@ -133,6 +153,16 @@
         <span class="tag">공지 채널 · RLNL 게임 · 결과 채널</span>
       </div>
     </header>
+
+    <!-- 상단 탭 네비 -->
+    <section>
+      <div class="tabs-row">
+        <a href="/bot-v1.html" class="tab-btn">📦 v1 개요</a>
+        <a href="/bot-v1-setup.html" class="tab-btn">⚙ /setup 설정</a>
+        <a href="/bot-v1-gamepanel.html" class="tab-btn">🎮 RLNL 게임 패널</a>
+        <a href="/bot-v1-checkin.html" class="tab-btn">📅 출석 · 위로금 · 리필</a>
+      </div>
+    </section>
 
     <section>
       <p>
