@@ -107,6 +107,21 @@
     a:hover {
       text-decoration: underline;
     }
+    .tabs-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tab-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -120,6 +135,16 @@
         <span class="tag">레벨 · 경험치 시스템</span>
       </div>
     </header>
+
+    <!-- 상단 탭 네비 -->
+    <section>
+      <div class="tabs-row">
+        <a href="/bot-v1.html" class="tab-btn">📦 v1 개요</a>
+        <a href="/bot-v1-setup.html" class="tab-btn">⚙ /setup 설정</a>
+        <a href="/bot-v1-gamepanel.html" class="tab-btn">🎮 RLNL 게임 패널</a>
+        <a href="/bot-v1-checkin.html" class="tab-btn">📅 출석 · 위로금 · 리필</a>
+      </div>
+    </section>
 
     <section>
       <p>
