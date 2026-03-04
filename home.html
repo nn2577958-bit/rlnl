@@ -236,7 +236,7 @@ body {
 .btn-row {
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;   /* 가운데 정렬 */
+  justify-content:center;
   align-items:center;
   gap:12px;
   margin-top:16px;
@@ -340,7 +340,6 @@ body {
     <button class="discord-btn" id="discord-btn">🙈 디스코드</button>
     <button class="inquiry-main-btn" id="inquiry-btn">📨 문의하기</button>
     <button class="inquiry-main-btn" id="faq-btn">❓ FAQ</button>
-    <!-- 새로 추가된 포인트 정책 버튼 -->
     <button class="inquiry-main-btn" id="points-btn">💳 포인트 정책</button>
   </div>
 </div>
@@ -361,15 +360,99 @@ const tabs        = document.querySelectorAll(".tab");
 const faqBtn      = document.getElementById("faq-btn");
 const pointsBtn   = document.getElementById("points-btn");
 
+// 상품 목록 (티켓봇/백업 클론/라이센스 포함)
 const products = [
-  {name:"🚀 디스코드 봇 일반",          price:"₩15,000",      desc:"기능 맞춤 제작 1개",                 tag:"bot",     badge:"기본 봇 제작"},
-  {name:"🚀 디스코드 봇 고급",          price:"₩30,000",      desc:"게임 봇 시스템 적용 등",             tag:"bot",     badge:"고급 기능"},
-  {name:"☁️ 디스코드 템플릿",           price:"₩5,000",       desc:"역할 & 기본 세팅",                   tag:"bot",     badge:"템플릿"},
-  {name:"☁️ 일반 디스코드 봇 호스팅",  price:"월₩5,000 ~시작",desc:"99.9% 디도스 보호 완벽 차단 빽업 기능", tag:"hosting", badge:"호스팅"},
-  {name:"🤖 고급 디스코드 봇 호스팅",  price:"₩10,000",      desc:"99.9% 디도스 보호 완벽 차단",         tag:"hosting", badge:"봇 호스팅"},
-  {name:"🌟 어드밴스드 봇 호스팅",     price:"₩20,000",      desc:"99.9% 디도스 보호 완벽 차단",         tag:"hosting", badge:"봇 호스팅"},
-  {name:"☁️ 프로필",                  price:"₩3,000 ~ 시작", desc:"이쁜 선생님이 해주셔요",              tag:"design",  badge:"프로필 디자인"},
-  {name:"☁️ 로고",                     price:"₩10,000 ~ 시작",desc:"홈페이지/디스코드/로고/등",           tag:"design",  badge:"로고 디자인"},
+  // 디스코드 봇 제작/설정
+  {
+    name: "🚀 디스코드 봇 일반",
+    price: "₩15,000 ~",
+    desc: "기능 맞춤 제작 1개 (기본 봇 제작)",
+    tag: "bot",
+    badge: "기본 봇 제작",
+  },
+  {
+    name: "🚀 디스코드 봇 고급",
+    price: "₩30,000 ~",
+    desc: "게임/시스템 등 고급 기능 포함 맞춤 제작",
+    tag: "bot",
+    badge: "고급 기능",
+  },
+  {
+    name: "☁️ 디스코드 템플릿",
+    price: "₩5,000 ~",
+    desc: "역할 · 채널 · 카테고리 기본 세팅 템플릿 제공",
+    tag: "bot",
+    badge: "템플릿",
+  },
+  {
+    name: "🧾 디스코드 백업 클론",
+    price: "₩5,000 ~",
+    desc: "서버 역할·채널·카테고리 복구 가능한 멀티 서버 백업 클론 봇",
+    tag: "bot",
+    badge: "백업/클론 봇",
+  },
+  {
+    name: "🎫 티켓봇 제작/세팅",
+    price: "₩10,000 ~",
+    desc: "RLNL Simple Ticket 봇 설치 및 서버 맞춤 세팅 서비스",
+    tag: "bot",
+    badge: "티켓봇 세팅",
+  },
+
+  // 라이센스 키 상품
+  {
+    name: "📅 RLNL BOT 30일 라이센스 키",
+    price: "₩10,000 ~",
+    desc: "30일 동안 사용하는 RLNL BOT 라이센스 키 1개 발급 (영수증 DM 후 키 지급)",
+    tag: "bot",
+    badge: "30일 라이센스",
+  },
+  {
+    name: "🔑 RLNL BOT 개인 소유 라이센스 키",
+    price: "₩30,000 ~",
+    desc: "만료 없이 사용하는 RLNL BOT 개인 소유 라이센스 키 1개 발급 (영수증 DM 후 키 지급)",
+    tag: "bot",
+    badge: "무기한 라이센스",
+  },
+
+  // 호스팅
+  {
+    name: "☁️ 일반 디스코드 봇 호스팅",
+    price: "월 ₩5,000 ~",
+    desc: "99.9% 디도스 보호 · 자동 백업 (기본 글로벌 호스팅)",
+    tag: "hosting",
+    badge: "기본 호스팅",
+  },
+  {
+    name: "🤖 고급 디스코드 봇 호스팅",
+    price: "월 ₩10,000 ~",
+    desc: "5GB SSD · 안정적인 디스코드 봇/웹 호스팅",
+    tag: "hosting",
+    badge: "프리미엄 호스팅",
+  },
+  {
+    name: "🌟 어드밴스드 봇 호스팅",
+    price: "월 ₩20,000 ~",
+    desc: "40GB SSD, 디스코드 봇 최대 4개 동시 호스팅",
+    tag: "hosting",
+    badge: "멀티 봇 호스팅",
+  },
+
+  // 디자인
+  {
+    name: "☁️ 프로필 디자인",
+    price: "₩3,000 ~",
+    desc: "감성 프로필 아트 1종 제작 (이쁜 선생님이 해주셔요)",
+    tag: "design",
+    badge: "프로필 디자인",
+  },
+  {
+    name: "☁️ 로고 디자인",
+    price: "₩10,000 ~",
+    desc: "홈페이지/디스코드/브랜드용 로고 제작",
+    tag: "design",
+    badge: "로고 디자인",
+  },
 ];
 
 // 상품 렌더
@@ -467,7 +550,7 @@ inquiryBtn.onclick = () => {
 💰 가격 및 상품 문의
 
 👤 Discord: soyugwon
-🔗 [https://discord.gg/yEym2KZ9BU](https://discord.gg/yEym2KZ9BU)
+🔗 https://discord.gg/yEym2KZ9BU
 
 👇 아래 디스코드 버튼을 눌러 문의를 보내주세요.`;
 
