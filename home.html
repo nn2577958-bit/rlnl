@@ -108,7 +108,7 @@ body {
   box-shadow:0 6px 14px rgba(37,99,235,.55);
 }
 
-/* === 추가: 섹션 공통 스타일 === */
+/* === 섹션 공통 스타일 === */
 .section {
   margin-top:10px;
   padding-top:12px;
@@ -176,22 +176,24 @@ body {
   font-size:11px;
 }
 
-/* CTA 버튼 */
+/* CTA 버튼 섹션 */
 .section-cta {
   text-align:center;
 }
 .cta-btn {
-  display:inline-block;
-  margin-top:8px;
-  padding:8px 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:10px;
+  padding:10px 26px;
   border-radius:999px;
   background:linear-gradient(135deg,#22c55e,#16a34a);
   color:#fff;
-  font-size:13px;
+  font-size:14px;
+  font-weight:600;
   text-decoration:none;
+  box-shadow:0 8px 20px rgba(34,197,94,.45);
 }
-
-/* ===== 기존 상품/버튼 스타일 그대로 ===== */
 
 /* 상품 그리드 */
 #product-list {
@@ -219,8 +221,6 @@ body {
   flex-direction:column;
   align-items:flex-start;
 }
-
-/* LED 외곽 테두리 */
 .product::before {
   content:'';
   position:absolute;
@@ -245,24 +245,18 @@ body {
   animation:led-border 8s linear infinite;
   pointer-events:none;
 }
-
-/* 카드 안쪽 내용 영역 (LED 테두리와 겹치지 않게) */
 .product-content {
   position:relative;
   z-index:1;
 }
-
-/* LED 테두리 회전 애니메이션 */
 @keyframes led-border {
   to { transform:rotate(360deg); }
 }
-
 .product:hover {
   transform:translateY(-6px);
   box-shadow:0 18px 28px rgba(15,23,42,.75);
   border-color:rgba(56,189,248,.7);
 }
-
 .product h3 {
   margin:0 0 6px;
   font-size:15px;
@@ -327,22 +321,22 @@ body {
   margin-top:16px;
 }
 
-/* 하단 버튼 스타일 */
+/* 하단 버튼 스타일 (4개만) */
 .logout-btn, .discord-btn, .inquiry-main-btn, .reset-btn {
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:6px;
-  padding:9px 18px;
+  padding:10px 22px;
   border:none;
   border-radius:999px;
   cursor:pointer;
   font-weight:600;
-  font-size:13px;
+  font-size:14px;
   color:#fff;
   transition:all .2s;
   box-shadow:0 4px 15px rgba(15,23,42,.7);
-  min-width:150px;
+  min-width:160px;
   text-align:center;
 }
 .logout-btn {background:linear-gradient(135deg,#d32f2f,#b71c1c)}
@@ -475,13 +469,12 @@ body {
     </a>
   </section>
 
+  <!-- 하단 버튼 4개만 -->
   <div class="btn-row">
-    <button class="logout-btn" id="logout-btn">🚪 로그아웃</button>
-    <button class="reset-btn" id="reset-points-btn">🧹 포인트 초기화</button>
-    <button class="discord-btn" id="discord-btn">🙈 디스코드</button>
-    <button class="inquiry-main-btn" id="inquiry-btn">📨 문의하기</button>
+    <button class="discord-btn" id="discord-btn">🙈 디스코드 입장</button>
     <button class="inquiry-main-btn" id="faq-btn">❓ FAQ</button>
     <button class="inquiry-main-btn" id="points-btn">💳 포인트 정책</button>
+    <button class="logout-btn" id="logout-btn">🚪 로그아웃</button>
   </div>
 </div>
 
@@ -494,13 +487,12 @@ const welcomeEl   = document.getElementById("welcome");
 const productList = document.getElementById("product-list");
 const logoutBtn   = document.getElementById("logout-btn");
 const discordBtn  = document.getElementById("discord-btn");
-const inquiryBtn  = document.getElementById("inquiry-btn");
-const resetBtn    = document.getElementById("reset-points-btn");
+const resetBtn    = document.getElementById("reset-points-btn"); // 버튼은 없지만 로직은 유지
 const tabs        = document.querySelectorAll(".tab");
 const faqBtn      = document.getElementById("faq-btn");
 const pointsBtn   = document.getElementById("points-btn");
 
-// 상품 목록 (티켓봇/백업 클론/라이센스 포함)
+// 상품 목록
 const products = [
   { name: "🚀 디스코드 봇 일반", price: "₩15,000 ~", desc: "기능 맞춤 제작 1개 (기본 봇 제작)", tag: "bot",    badge: "기본 봇 제작" },
   { name: "🚀 디스코드 봇 고급", price: "₩30,000 ~", desc: "게임/시스템 등 고급 기능 포함 맞춤 제작",        tag: "bot",    badge: "고급 기능" },
@@ -578,8 +570,8 @@ function attachBuyEvents() {
   });
 }
 
-// 포인트 초기화
-resetBtn.onclick = async () => {
+// 포인트 초기화 (관리자용, 버튼은 숨김 상태)
+resetBtn?.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) {
     alert("로그인 후 이용해 주세요.");
@@ -606,24 +598,7 @@ resetBtn.onclick = async () => {
 
   welcomeEl.textContent = `환영합니다, ${nickname}님! (포인트: ${points}점) 👋`;
   alert("포인트가 0점으로 초기화되었습니다.");
-};
-
-// 문의하기 버튼
-inquiryBtn.onclick = () => {
-  const message = `🎯 라니 MALL 문의
-💰 가격 및 상품 문의
-
-👤 Discord: soyugwon
-🔗 https://discord.gg/yEym2KZ9BU
-
-👇 아래 디스코드 버튼을 눌러 문의를 보내주세요.`;
-
-  navigator.clipboard.writeText(message).then(() => {
-    alert("문의 텍스트가 복사되었습니다. 디스코드에서 붙여넣기 해 주세요.");
-  }).catch(() => {
-    prompt("디스코드로 보내세요:", message);
-  });
-};
+});
 
 let statusInterval;
 function updateStatus() {
@@ -669,10 +644,8 @@ onAuthStateChanged(auth, async (user) => {
 
     welcomeEl.textContent = `환영합니다, ${nickname}님! (포인트: ${points}점) 👋`;
 
-    if (isAdmin) {
+    if (isAdmin && resetBtn) {
       resetBtn.style.display = "inline-flex";
-    } else {
-      resetBtn.style.display = "none";
     }
 
     renderProducts();
@@ -691,7 +664,7 @@ logoutBtn.onclick = async () => {
   catch (error) { console.error("로그아웃 오류:", error); }
 };
 
-// 디스코드 버튼
+// 디스코드 입장 버튼
 discordBtn.onclick = () => window.open("https://discord.gg/yEym2KZ9BU", "_blank");
 
 // FAQ 버튼
