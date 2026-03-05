@@ -369,6 +369,7 @@ body {
       <div class="top-actions">
         <button class="top-btn"         id="faq-btn">FAQ</button>
         <button class="top-btn"         id="points-btn">포인트 정책</button>
+        <button class="top-btn"         id="discord-btn">디스코드 입장</button>
         <button class="top-btn primary" id="charge-btn">충전하기</button>
         <button class="top-btn danger"  id="logout-btn">로그아웃</button>
       </div>
@@ -437,18 +438,6 @@ body {
     </div>
   </section>
 
-  <!-- CTA 섹션 -->
-  <section class="section section-cta">
-    <h2>지금 바로 디스코드로 상담 받기</h2>
-    <p class="section-sub">
-      어떤 봇이 필요하신지 편하게 말씀해 주세요. 라니가 현재 상황에 맞는 구성을 같이 잡아드립니다.
-    </p>
-    <a href="https://discord.gg/yEym2KZ9BU" target="_blank" class="cta-btn">
-      디스코드 서버 입장하기
-    </a>
-  </section>
-</div>
-
 <script type="module">
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
@@ -462,6 +451,7 @@ const tabs        = document.querySelectorAll(".tab");
 const faqBtn      = document.getElementById("faq-btn");
 const pointsBtn   = document.getElementById("points-btn");
 const chargeBtn   = document.getElementById("charge-btn");
+const discordBtn  = document.getElementById("discord-btn");
 
 // 상품 목록
 // 필요하면 product마다 cost(필요 포인트)를 따로 둘 수 있음 (기본은 1점)
@@ -723,6 +713,11 @@ faqBtn?.addEventListener("click", () => {
 // 포인트 정책 버튼
 pointsBtn?.addEventListener("click", () => {
   window.location.href = "points.html";
+});
+
+// 🔹 디스코드 입장 버튼
+discordBtn?.addEventListener("click", () => {
+  window.open("https://discord.gg/yEym2KZ9BU", "_blank");
 });
 
 // ESC 로 로그아웃
