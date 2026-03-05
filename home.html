@@ -483,11 +483,11 @@ const products = [
   { name: "☁️ 로고 디자인",           price: "₩10,000 ~", desc: "홈페이지/디스코드/브랜드용 로고 제작",              tag: "design",  badge: "로고 디자인",   cost: 10000 },
 ];
 
-// 상품 렌더
-function renderProducts(filter = "all") {
+// 상품 렌더 (전체 탭 없이, 기본은 디스코드 봇만)
+function renderProducts(filter = "bot") {
   productList.innerHTML = "";
   products
-    .filter(p => filter === "all" || p.tag === filter)
+    .filter(p => p.tag === filter)
     .forEach((product, index) => {
       const div = document.createElement("div");
       div.className = "product";
