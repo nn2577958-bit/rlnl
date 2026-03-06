@@ -114,6 +114,32 @@ body {
   }
 }
 
+/* 홈 대표 이미지 */
+.hero-image-wrap {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 0 12px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(148,163,184,.55);
+  background: radial-gradient(circle at top, rgba(148,163,184,.2), transparent 60%);
+  box-shadow:
+    0 20px 40px rgba(15,23,42,.9),
+    0 0 30px rgba(56,189,248,.35);
+}
+.hero-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: saturate(1.12) contrast(1.05);
+  transition: transform .35s ease, filter .35s ease;
+}
+.hero-image-wrap:hover .hero-image {
+  transform: scale(1.06);
+  filter: saturate(1.2) contrast(1.1);
+}
+
 /* 환영 문구 */
 #welcome {
   font-size:20px;
@@ -377,6 +403,15 @@ body {
   <div class="main-layout">
     <!-- 왼쪽 컬럼 -->
     <div>
+      <!-- 홈 대표 이미지 영역 -->
+      <div class="hero-image-wrap">
+        <img
+          src="https://cdn.discordapp.com/attachments/1083101135096795201/1479323503164657774/662034559_e82a01f0_257296.gif?ex=69ab9edf&is=69aa4d5f&hm=f2a595c855b74131dfe306ce9c75b5b829910fcb598c2c03d67945029df5e246"
+          alt="라니 MALL 대표 이미지"
+          class="hero-image"
+        >
+      </div>
+
       <h1 id="welcome">로그인 확인 중...</h1>
       
       <div class="notice">
@@ -483,7 +518,7 @@ const products = [
   { name: "☁️ 로고 디자인",           price: "₩10,000 ~", desc: "홈페이지/디스코드/브랜드용 로고 제작",              tag: "design",  badge: "로고 디자인",   cost: 10000 },
 ];
 
-// 상품 렌더 (전체 탭 없이, 기본은 디스코드 봇만)
+// 상품 렌더 (기본은 디스코드 봇)
 function renderProducts(filter = "bot") {
   productList.innerHTML = "";
   products
@@ -656,7 +691,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// 포인트 충전하기 버튼 (요청만, 수동 처리)
+// 포인트 충전하기 버튼
 chargeBtn?.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) {
