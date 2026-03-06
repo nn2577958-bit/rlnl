@@ -6,30 +6,30 @@
 <title>라니 디지털 - 서비스 이용 약관 (안내용)</title>
 
 <link rel="icon" type="image/png"
-      href="https://cdn.phototourl.com/uploads/2026-02-28-90909391-9783-4299-a370-a3766a19e150.png">
+      href="https://cdn.discordapp.com/attachments/1083101135096795201/1479323503164657774/662034559_e82a01f0_257296.gif?ex=69ab9edf&is=69aa4d5f&hm=f2a595c855b74131dfe306ce9c75b5b829910fcb598c2c03d67945029df5e246">
 
 <style>
 * { box-sizing:border-box; margin:0; padding:0 }
 body {
   min-height:100vh;
-  font-family:'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   background:
-    radial-gradient(circle at 0% 0%, #dbeafe 0, transparent 55%),
-    radial-gradient(circle at 100% 0%, #fee2e2 0, transparent 55%),
-    linear-gradient(180deg,#f9fafb,#e5e7eb);
-  color:#0f172a;
+    radial-gradient(circle at 0% 0%, rgba(56,189,248,.16), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(244,114,182,.12), transparent 55%),
+    #020617;
+  color:#e5e7eb;
 }
 
-/* 상단 헤더 */
+/* 상단 바 (에디터 상단바 느낌) */
 .header {
   width:100%;
-  padding:18px 16px 10px;
-  border-bottom:1px solid rgba(148,163,184,.35);
-  background:linear-gradient(120deg,rgba(15,23,42,.04),rgba(59,130,246,.06));
+  border-bottom:1px solid rgba(31,41,55,.9);
+  background:#020617;
 }
 .header-inner {
   max-width:1080px;
   margin:0 auto;
+  padding:10px 16px 8px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -38,15 +38,14 @@ body {
 .brand {
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
 }
 .brand-logo-wrap {
-  width:40px;
-  height:40px;
-  border-radius:14px;
+  width:26px;
+  height:26px;
+  border-radius:7px;
   overflow:hidden;
   border:1px solid rgba(148,163,184,.6);
-  box-shadow:0 10px 26px rgba(15,23,42,.4);
   background:#020617;
 }
 .brand-logo-wrap img {
@@ -57,116 +56,173 @@ body {
 .brand-text {
   display:flex;
   flex-direction:column;
-  gap:2px;
 }
 .brand-name {
-  font-size:17px;
+  font-size:13px;
   font-weight:700;
-  letter-spacing:.04em;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#e5e7eb;
 }
 .brand-sub {
-  font-size:11px;
-  color:#4b5563;
+  font-size:10px;
+  color:#9ca3af;
 }
 .header-pill {
-  padding:6px 10px;
+  padding:4px 9px;
   border-radius:999px;
-  font-size:11px;
-  border:1px solid rgba(148,163,184,.6);
-  background:rgba(255,255,255,.9);
+  font-size:10px;
+  border:1px solid rgba(55,65,81,.9);
+  background:#020617;
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  color:#374151;
+  gap:5px;
+  color:#9ca3af;
 }
 
-/* 메인 컨테이너 */
+/* 메인 컨테이너 (코드 에디터 패널) */
 .main {
   width:100%;
-  padding:18px 16px 28px;
 }
 .main-inner {
-  max-width:1080px;
+  max-width:960px;
   margin:0 auto;
+  padding:18px 16px 26px;
 }
 
-/* 인트로 */
+/* 파일 헤더 + 타자 효과 */
+.editor-header {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:4px;
+}
+.dot {
+  width:9px;
+  height:9px;
+  border-radius:999px;
+}
+.dot.red { background:#ef4444; }
+.dot.yellow { background:#facc15; }
+.dot.green { background:#22c55e; }
+
+.type-line {
+  font-size:12px;
+  color:#a5b4fc;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:1px solid #a5b4fc;
+  width:0;
+  animation:typing 2.2s steps(40,end) forwards, blink .9s step-end infinite;
+}
+@keyframes typing {
+  from { width:0; }
+  to { width:280px; }
+}
+@keyframes blink {
+  from, to { border-color:transparent; }
+  50% { border-color:#a5b4fc; }
+}
+
+/* 약관 코드 박스 */
+.tos-shell {
+  margin-top:10px;
+  border-radius:10px;
+  background:rgba(15,23,42,.95);
+  border:1px solid rgba(30,64,175,.7);
+  box-shadow:0 18px 40px rgba(15,23,42,.9);
+  padding:12px 12px 14px;
+  position:relative;
+}
+.tos-shell::before {
+  content:"// RLNL Terms Preview";
+  position:absolute;
+  top:8px;
+  right:12px;
+  font-size:10px;
+  color:#475569;
+}
+
+/* 인트로 블록 */
 .page-kicker {
   font-size:11px;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:#6b7280;
+  color:#64748b;
+  margin-bottom:3px;
 }
 .page-title {
-  margin-top:4px;
-  font-size:22px;
-  font-weight:700;
-  color:#111827;
+  font-size:16px;
+  color:#e5e7eb;
 }
 .page-sub {
-  margin-top:6px;
-  font-size:13px;
-  color:#4b5563;
+  margin-top:4px;
+  font-size:11px;
+  color:#9ca3af;
 }
 .meta-row {
-  margin-top:6px;
-  font-size:11px;
+  margin-top:3px;
+  font-size:10px;
   color:#6b7280;
 }
 
-/* 안내 박스 */
+/* 안내 박스 (주석 블록 느낌) */
 .notice-box {
-  margin-top:12px;
-  padding:10px 12px;
-  border-radius:10px;
-  background:white;
-  border:1px solid rgba(148,163,184,.45);
-  font-size:12px;
-  color:#111827;
+  margin-top:10px;
+  padding:8px 10px;
+  border-radius:8px;
+  background:#020617;
+  border:1px dashed rgba(148,163,184,.6);
+  font-size:11px;
+  color:#e5e7eb;
   line-height:1.6;
 }
-.notice-box b { color:#b91c1c; }
+.notice-box b { color:#f97373; }
 
-/* 약관 본문 */
+/* 약관 본문 (섹션 = 함수 블록 느낌) */
 .tos {
-  margin-top:18px;
-  font-size:12px;
-  color:#111827;
-  line-height:1.8;
+  margin-top:12px;
+  font-size:11px;
+  color:#e5e7eb;
+  line-height:1.7;
 }
 .tos-section {
-  margin-bottom:16px;
+  margin-bottom:12px;
+  padding:8px 0;
+  border-top:1px solid rgba(30,41,59,.9);
+}
+.tos-section:first-child {
+  border-top:none;
 }
 .tos-title {
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:4px;
-  color:#111827;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:3px;
+  color:#e5e7eb;
 }
 .tos-body {
-  font-size:12px;
-  color:#111827;
+  font-size:11px;
+  color:#e5e7eb;
 }
-.tos-body p { margin:3px 0; }
+.tos-body p { margin:2px 0; }
 .tos-body ul {
   margin:4px 0 4px 18px;
 }
 .tos-body li {
-  margin:2px 0;
+  margin:1px 0;
 }
 
 /* 하단 푸터/버튼 */
 .footer {
-  margin-top:20px;
-  padding-top:12px;
-  border-top:1px solid rgba(148,163,184,.45);
+  margin-top:14px;
+  padding-top:8px;
+  border-top:1px solid rgba(30,41,59,.9);
   display:flex;
   flex-wrap:wrap;
   gap:8px;
   justify-content:space-between;
   align-items:center;
-  font-size:11px;
+  font-size:10px;
   color:#6b7280;
 }
 .footer span { white-space:nowrap }
@@ -174,39 +230,39 @@ body {
 .footer-actions {
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
+  gap:6px;
 }
 .btn {
-  padding:7px 14px;
+  padding:6px 12px;
   border-radius:999px;
-  border:1px solid rgba(148,163,184,.7);
+  border:1px solid rgba(75,85,99,.9);
   cursor:pointer;
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  background:white;
-  color:#111827;
-  transition:background .15s, transform .15s, box-shadow .15s, border-color .15s;
+  gap:5px;
+  background:#020617;
+  color:#e5e7eb;
+  transition:background .12s, transform .12s, box-shadow .12s, border-color .12s;
 }
 .btn:hover {
-  background:#e5e7eb;
+  background:#111827;
 }
 .btn-primary {
-  background:linear-gradient(135deg,#2563eb,#22c55e);
-  color:white;
-  border-color:transparent;
-  box-shadow:0 8px 18px rgba(37,99,235,.28);
+  border-color:#4f46e5;
+  background:linear-gradient(135deg,#4f46e5,#22c55e);
+  color:#f9fafb;
+  box-shadow:0 0 18px rgba(79,70,229,.45);
 }
 .btn-primary:hover {
   transform:translateY(-1px);
-  box-shadow:0 10px 22px rgba(37,99,235,.35);
+  box-shadow:0 0 22px rgba(79,70,229,.55);
 }
 
 /* 링크 막기용 스타일(기본 색) */
 a {
-  color:#2563eb;
+  color:#38bdf8;
   text-decoration:underline;
   cursor:pointer;
 }
@@ -214,7 +270,6 @@ a {
 /* 모바일 */
 @media (max-width:640px){
   .header-inner { flex-direction:column; align-items:flex-start; }
-  .page-title { font-size:19px; }
 }
 </style>
 </head>
@@ -227,139 +282,181 @@ a {
              alt="라니 디지털 로고" />
       </div>
       <div class="brand-text">
-        <div class="brand-name">라니 디지털</div>
-        <div class="brand-sub">RLNL Digital Service · 안내용 약관 페이지</div>
+        <div class="brand-name">RANI DIGITAL</div>
+        <div class="brand-sub">tos-preview.js · 안내용 약관 페이지</div>
       </div>
     </div>
     <div class="header-pill">
       <span>ℹ️</span>
-      <span>현재 화면은 서비스 소개 및 약관 확인을 위한 안내용 버전입니다.</span>
+      <span>이 화면은 정식 약관이 아닌 안내·초안용 입니다.</span>
     </div>
   </div>
 </header>
 
 <main class="main">
   <div class="main-inner">
-    <div class="page-kicker">TERMS (BETA)</div>
-    <h1 class="page-title">서비스 이용 약관 (요약 안내)</h1>
-    <p class="page-sub">
-      정식 서비스 오픈 전, 라니 디지털 서비스 이용 흐름과 기본적인 권리·의무를 미리 확인할 수 있도록 구성된 안내용 약관입니다.
-    </p>
-    <p class="meta-row">
-      최신 업데이트: 2026-02-28 · 본 문서는 내부 안내 및 사용자 미리보기용으로 작성되었습니다.
-    </p>
-
-    <div class="notice-box">
-      <b>중요</b> · 이 페이지는 <b>안내용/미리보기용</b>으로 제공되며, 실제 회원 가입·로그인·결제 기능은 포함되어 있지 않습니다.
-      정식 오픈 시, 별도의 정식 이용 약관 및 개인정보 처리방침이 고지될 예정입니다.
+    <div class="editor-header">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span>src/terms/tos_preview.ts</span>
     </div>
+    <div class="type-line">typing &gt; 라니 디지털 약관(안) 로드 중...</div>
 
-    <section class="tos">
-      <article class="tos-section">
-        <h2 class="tos-title">1. 서비스 개요</h2>
-        <div class="tos-body">
-          <p>
-            라니 디지털(이하 ‘회사’)은 디스코드 기반의 커뮤니티 운영, 디지털 콘텐츠 제작 및 제공,
-            라니 MALL을 통한 디지털 용역(디스코드 봇, 서버 세팅, 디자인 등)을 주요 목적으로 하는 온라인 서비스를 제공합니다.
-          </p>
-          <p>
-            본 약관(안)은 회원이 회사가 제공하는 서비스를 이용함에 있어 필요한 기본적인 권리, 의무 및 책임 사항을
-            미리 안내하기 위한 문서입니다.
-          </p>
+    <div class="tos-shell">
+      <div class="page-kicker">// TERMS (BETA)</div>
+      <h1 class="page-title">서비스 이용 약관 (요약 안내)</h1>
+      <p class="page-sub">
+        정식 서비스 오픈 전, 라니 디지털 서비스 이용 흐름과 기본적인 권리·의무를 미리 확인할 수 있도록 구성된 안내용 약관입니다.
+      </p>
+      <p class="meta-row">
+        // latest: 2026-02-28 · 이 문서는 내부 안내 및 사용자 미리보기용 초안입니다.
+      </p>
+
+      <div class="notice-box">
+        <b>중요</b> · 이 페이지는 <b>안내용/미리보기용</b>으로 제공되며, 실제 회원 가입·로그인·결제 기능은 포함되어 있지 않습니다.
+        정식 오픈 시, 별도의 정식 이용 약관 및 개인정보 처리방침이 고지될 예정입니다.
+      </div>
+
+      <section class="tos">
+        <article class="tos-section">
+          <h2 class="tos-title">1. 서비스 개요</h2>
+          <div class="tos-body">
+            <p>
+              라니 디지털(이하 ‘회사’)은 디스코드 기반의 커뮤니티 운영, 디지털 콘텐츠 제작 및 제공,
+              라니 MALL을 통한 디지털 용역(디스코드 봇, 서버 세팅, 디자인 등)을 주요 목적으로 하는 온라인 서비스를 제공합니다.
+            </p>
+            <p>
+              본 약관(안)은 회원이 회사가 제공하는 서비스를 이용함에 있어 필요한 기본적인 권리, 의무 및 책임 사항을
+              미리 안내하기 위한 문서입니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">2. 회원 가입 및 계정</h2>
+          <div class="tos-body">
+            <p>
+              현재 페이지는 <b>안내용 페이지</b>로, 실제 회원 가입 및 로그인 기능은 제공되지 않습니다.
+              정식 서비스 오픈 이후, 회사가 별도로 안내하는 절차에 따라 계정 생성 및 이용이 가능해집니다.
+            </p>
+            <p>
+              실제 서비스 이용 시에는, 회원은 본인의 이메일 및 디스코드 계정을 기반으로 식별되며,
+              계정 보안을 위해 비밀번호 관리, 2차 인증(도입 시) 등에 주의해야 합니다.
+            </p>
+            <p>
+              타인의 정보를 도용하여 가입하거나, 허위 정보로 가입하는 행위는 제한될 수 있으며,
+              이로 인해 발생하는 문제에 대해 회사는 책임을 지지 않습니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">3. 서비스 이용 범위 및 변경</h2>
+          <div class="tos-body">
+            <p>
+              회사는 디스코드 봇, 서버 세팅, 디지털 디자인, 포인트 기반 게임(말경주·블랙잭·바카라) 등
+              다양한 기능을 제공할 수 있으며, 서비스 내용은 운영 상황에 따라 추가·변경·중단될 수 있습니다.
+            </p>
+            <p>
+              서비스 안정성 확보, 보안, 불법 이용 방지 등을 위하여, 회사는 필요 시 일부 기능을 제한하거나
+              점검을 위한 일시 중단을 진행할 수 있습니다.
+            </p>
+            <p>
+              주요 변경 사항이 있는 경우, 디스코드 공지·홈페이지 공지 등을 통해 사전에 또는 사후에 안내합니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">4. 이용 제한 및 책임</h2>
+          <div class="tos-body">
+            <p>
+              회사는 이용자가 관련 법령, 공서양속 또는 회사의 정책·약관(정식 버전)을 위반하는 경우,
+              서비스 이용 제한, 계정 정지, 포인트 회수 등 필요한 조치를 취할 수 있습니다.
+            </p>
+            <ul>
+              <li>타인의 계정 또는 결제 정보를 무단으로 사용하는 경우</li>
+              <li>불법적인 도박·환전·사설 매매와 연계하여 서비스를 이용하는 경우</li>
+              <li>서비스 또는 시스템을 악의적으로 공격·변조·자동화(매크로)로 남용하는 경우</li>
+            </ul>
+            <p>
+              이용자의 귀책 사유로 인해 발생한 손해에 대해서는 회사가 책임을 지지 않으며,
+              제3자에게 손해가 발생한 경우 해당 이용자가 모든 법적 책임을 부담합니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">5. 포인트 및 결제와의 관계</h2>
+          <div class="tos-body">
+            <p>
+              본 서비스에서 사용되는 포인트에 대한 상세한 내용은
+              별도 페이지인 「포인트 · 결제 · 게임 정책」 문서에서 규정하며,
+              이 약관(안)은 해당 정책과 함께 해석됩니다.
+            </p>
+            <p>
+              포인트는 서비스 내부에서만 사용 가능한 전용 점수이며,
+              어떤 경우에도 현금·가상자산으로의 직접 환전·출금을 지원하지 않습니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">6. 개인정보 및 보안</h2>
+          <div class="tos-body">
+            <p>
+              현재 안내용 페이지에는 실제 회원 정보 수집 기능이 포함되어 있지 않으며,
+              정식 서비스 오픈 시 별도의 「개인정보 처리방침」을 통해
+              수집 항목, 보관 기간, 이용 목적 등을 투명하게 고지할 예정입니다.
+            </p>
+            <p>
+              회원은 본인의 계정 및 비밀번호 관리에 책임을 가지며,
+              계정 공유·양도 등으로 발생하는 문제에 대해 회사는 책임을 지지 않습니다.
+            </p>
+          </div>
+        </article>
+
+        <article class="tos-section">
+          <h2 class="tos-title">7. 약관(안) 변경 및 고지</h2>
+          <div class="tos-body">
+            <p>
+              이 문서는 정식 약관이 아닌 <b>안내용/초안</b> 성격의 문서이며,
+              실제 서비스 출시 및 법령 변화, 서비스 구조 변경 등에 따라 내용이 수정·보완될 수 있습니다.
+            </p>
+            <p>
+              정식 서비스 오픈 시에는, 최종 확정된 이용 약관과 함께
+              디스코드 공지 및 홈페이지를 통해 공지할 예정입니다.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <span>© 2026 RLNL Digital · 라니 디지털 (안내용 약관)</span>
+        <div class="footer-actions">
+          <button class="btn" type="button" onclick="history.back()">← 이전 화면</button>
+          <button class="btn btn-primary" type="button" id="dummy-btn">🚫 실제 가입 기능 없음</button>
         </div>
-      </article>
+      </footer>
+    </div>
+  </div>
+</main>
 
-      <article class="tos-section">
-        <h2 class="tos-title">2. 회원 가입 및 계정</h2>
-        <div class="tos-body">
-          <p>
-            현재 페이지는 <b>안내용 페이지</b>로, 실제 회원 가입 및 로그인 기능은 제공되지 않습니다.
-            정식 서비스 오픈 이후, 회사가 별도로 안내하는 절차에 따라 계정 생성 및 이용이 가능해집니다.
-          </p>
-          <p>
-            실제 서비스 이용 시에는, 회원은 본인의 이메일 및 디스코드 계정을 기반으로 식별되며,
-            계정 보안을 위해 비밀번호 관리, 2차 인증(도입 시) 등에 주의해야 합니다.
-          </p>
-          <p>
-            타인의 정보를 도용하여 가입하거나, 허위 정보로 가입하는 행위는 제한될 수 있으며,
-            이로 인해 발생하는 문제에 대해 회사는 책임을 지지 않습니다.
-          </p>
-        </div>
-      </article>
+<script>
+// 모든 a 클릭 막고 안내만
+document.addEventListener('click', function (e) {
+  const link = e.target.closest('a');
+  if (link) {
+    e.preventDefault();
+    alert('현재는 안내용 페이지입니다.\n로그인·가입·이동 기능은 아직 제공되지 않습니다.');
+  }
+});
 
-      <article class="tos-section">
-        <h2 class="tos-title">3. 서비스 이용 범위 및 변경</h2>
-        <div class="tos-body">
-          <p>
-            회사는 디스코드 봇, 서버 세팅, 디지털 디자인, 포인트 기반 게임(말경주·블랙잭·바카라) 등
-            다양한 기능을 제공할 수 있으며, 서비스 내용은 운영 상황에 따라 추가·변경·중단될 수 있습니다.
-          </p>
-          <p>
-            서비스 안정성 확보, 보안, 불법 이용 방지 등을 위하여, 회사는 필요 시 일부 기능을 제한하거나
-            점검을 위한 일시 중단을 진행할 수 있습니다.
-          </p>
-          <p>
-            주요 변경 사항이 있는 경우, 디스코드 공지·홈페이지 공지 등을 통해 사전에 또는 사후에 안내합니다.
-          </p>
-        </div>
-      </article>
+document.getElementById('dummy-btn').onclick = () => {
+  alert('이 페이지는 안내용 약관(초안)입니다.\n실제 회원 가입 및 결제 기능은 정식 오픈 시 제공됩니다.');
+};
+</script>
 
-      <article class="tos-section">
-        <h2 class="tos-title">4. 이용 제한 및 책임</h2>
-        <div class="tos-body">
-          <p>
-            회사는 이용자가 관련 법령, 공서양속 또는 회사의 정책·약관(정식 버전)을 위반하는 경우,
-            서비스 이용 제한, 계정 정지, 포인트 회수 등 필요한 조치를 취할 수 있습니다.
-          </p>
-          <ul>
-            <li>타인의 계정 또는 결제 정보를 무단으로 사용하는 경우</li>
-            <li>불법적인 도박·환전·사설 매매와 연계하여 서비스를 이용하는 경우</li>
-            <li>서비스 또는 시스템을 악의적으로 공격·변조·자동화(매크로)로 남용하는 경우</li>
-          </ul>
-          <p>
-            이용자의 귀책 사유로 인해 발생한 손해에 대해서는 회사가 책임을 지지 않으며,
-            제3자에게 손해가 발생한 경우 해당 이용자가 모든 법적 책임을 부담합니다.
-          </p>
-        </div>
-      </article>
-
-      <article class="tos-section">
-        <h2 class="tos-title">5. 포인트 및 결제와의 관계</h2>
-        <div class="tos-body">
-          <p>
-            본 서비스에서 사용되는 포인트에 대한 상세한 내용은
-            별도 페이지인 「포인트 · 결제 · 게임 정책」 문서에서 규정하며,
-            이 약관(안)은 해당 정책과 함께 해석됩니다.
-          </p>
-          <p>
-            포인트는 서비스 내부에서만 사용 가능한 전용 점수이며,
-            어떤 경우에도 현금·가상자산으로의 직접 환전·출금을 지원하지 않습니다.
-          </p>
-        </div>
-      </article>
-
-      <article class="tos-section">
-        <h2 class="tos-title">6. 개인정보 및 보안</h2>
-        <div class="tos-body">
-          <p>
-            현재 안내용 페이지에는 실제 회원 정보 수집 기능이 포함되어 있지 않으며,
-            정식 서비스 오픈 시 별도의 「개인정보 처리방침」을 통해
-            수집 항목, 보관 기간, 이용 목적 등을 투명하게 고지할 예정입니다.
-          </p>
-          <p>
-            회원은 본인의 계정 및 비밀번호 관리에 책임을 가지며,
-            계정 공유·양도 등으로 발생하는 문제에 대해 회사는 책임을 지지 않습니다.
-          </p>
-        </div>
-      </article>
-
-      <article class="tos-section">
-        <h2 class="tos-title">7. 약관(안) 변경 및 고지</h2>
-        <div class="tos-body">
-          <p>
-            이 문서는 정식 약관이 아닌 <b>안내용/초안</b> 성격의 문서이며,
-            실제 서비스 출시 및 법령 변화, 서비스 구조 변경 등에 따라 내용이 수정·보완될 수 있습니다.
-          </p>
-          <p>
-            정식 서비스 오픈 시에는, 최종 확정된 이용 약관과 함께
-            디스코드 공지 및 홈페이지를 통해 공지할 예정입니다.
+</body>
+</html>
