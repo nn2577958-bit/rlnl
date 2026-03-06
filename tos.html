@@ -20,7 +20,7 @@ body {
   color:#e5e7eb;
 }
 
-/* 상단 바 (에디터 상단바 느낌) */
+/* 상단 바 */
 .header {
   width:100%;
   border-bottom:1px solid rgba(31,41,55,.9);
@@ -80,7 +80,7 @@ body {
   color:#9ca3af;
 }
 
-/* 메인 컨테이너 (코드 에디터 패널) */
+/* 메인 컨테이너 */
 .main {
   width:100%;
 }
@@ -166,7 +166,7 @@ body {
   color:#6b7280;
 }
 
-/* 안내 박스 (주석 블록 느낌) */
+/* 안내 박스 */
 .notice-box {
   margin-top:10px;
   padding:8px 10px;
@@ -179,34 +179,47 @@ body {
 }
 .notice-box b { color:#f97373; }
 
-/* 약관 본문 (섹션 = 함수 블록 느낌) */
+/* 약관 카드 레이아웃 */
 .tos {
   margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:10px;
+}
+
+/* 각 조항 카드 */
+.tos-card {
+  border-radius:9px;
+  border:1px solid rgba(30,41,59,.9);
+  background:rgba(15,23,42,.9);
+  padding:10px 11px 9px;
   font-size:11px;
   color:#e5e7eb;
   line-height:1.7;
+  position:relative;
 }
-.tos-section {
-  margin-bottom:12px;
-  padding:8px 0;
-  border-top:1px solid rgba(30,41,59,.9);
+.tos-card-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:4px;
 }
-.tos-section:first-child {
-  border-top:none;
+.tos-badge {
+  font-size:10px;
+  padding:2px 7px;
+  border-radius:999px;
+  border:1px solid rgba(79,70,229,.8);
+  color:#a5b4fc;
+  background:rgba(30,64,175,.15);
 }
 .tos-title {
   font-size:12px;
   font-weight:600;
-  margin-bottom:3px;
-  color:#e5e7eb;
-}
-.tos-body {
-  font-size:11px;
   color:#e5e7eb;
 }
 .tos-body p { margin:2px 0; }
 .tos-body ul {
-  margin:4px 0 4px 18px;
+  margin:4px 0 4px 16px;
 }
 .tos-body li {
   margin:1px 0;
@@ -260,7 +273,7 @@ body {
   box-shadow:0 0 22px rgba(79,70,229,.55);
 }
 
-/* 링크 막기용 스타일(기본 색) */
+/* 링크 막기용 스타일 */
 a {
   color:#38bdf8;
   text-decoration:underline;
@@ -318,9 +331,14 @@ a {
         정식 오픈 시, 별도의 정식 이용 약관 및 개인정보 처리방침이 고지될 예정입니다.
       </div>
 
+      <!-- 조항 카드 그리드 -->
       <section class="tos">
-        <article class="tos-section">
-          <h2 class="tos-title">1. 서비스 개요</h2>
+        <!-- 1조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 1 조</span>
+            <h2 class="tos-title">서비스 개요</h2>
+          </div>
           <div class="tos-body">
             <p>
               라니 디지털(이하 ‘회사’)은 디스코드 기반의 커뮤니티 운영, 디지털 콘텐츠 제작 및 제공,
@@ -333,8 +351,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">2. 회원 가입 및 계정</h2>
+        <!-- 2조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 2 조</span>
+            <h2 class="tos-title">회원 가입 및 계정</h2>
+          </div>
           <div class="tos-body">
             <p>
               현재 페이지는 <b>안내용 페이지</b>로, 실제 회원 가입 및 로그인 기능은 제공되지 않습니다.
@@ -351,8 +373,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">3. 서비스 이용 범위 및 변경</h2>
+        <!-- 3조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 3 조</span>
+            <h2 class="tos-title">서비스 이용 범위 및 변경</h2>
+          </div>
           <div class="tos-body">
             <p>
               회사는 디스코드 봇, 서버 세팅, 디지털 디자인, 포인트 기반 게임(말경주·블랙잭·바카라) 등
@@ -368,8 +394,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">4. 이용 제한 및 책임</h2>
+        <!-- 4조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 4 조</span>
+            <h2 class="tos-title">이용 제한 및 책임</h2>
+          </div>
           <div class="tos-body">
             <p>
               회사는 이용자가 관련 법령, 공서양속 또는 회사의 정책·약관(정식 버전)을 위반하는 경우,
@@ -387,8 +417,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">5. 포인트 및 결제와의 관계</h2>
+        <!-- 5조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 5 조</span>
+            <h2 class="tos-title">포인트 및 결제와의 관계</h2>
+          </div>
           <div class="tos-body">
             <p>
               본 서비스에서 사용되는 포인트에 대한 상세한 내용은
@@ -402,8 +436,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">6. 외주 작업 및 봇·게임 기능</h2>
+        <!-- 6조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 6 조</span>
+            <h2 class="tos-title">외주 작업 및 봇·게임 기능</h2>
+          </div>
           <div class="tos-body">
             <p>
               회사가 외주, 커미션, 판매, 배포 등의 방식으로 제공하는 디스코드 봇, 게임 패널, 스크립트, 웹 패널 등은
@@ -429,8 +467,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">7. 개인정보 및 보안</h2>
+        <!-- 7조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 7 조</span>
+            <h2 class="tos-title">개인정보 및 보안</h2>
+          </div>
           <div class="tos-body">
             <p>
               현재 안내용 페이지에는 실제 회원 정보 수집 기능이 포함되어 있지 않으며,
@@ -444,8 +486,12 @@ a {
           </div>
         </article>
 
-        <article class="tos-section">
-          <h2 class="tos-title">8. 약관(안) 변경 및 고지</h2>
+        <!-- 8조 -->
+        <article class="tos-card">
+          <div class="tos-card-header">
+            <span class="tos-badge">제 8 조</span>
+            <h2 class="tos-title">약관(안) 변경 및 고지</h2>
+          </div>
           <div class="tos-body">
             <p>
               이 문서는 정식 약관이 아닌 <b>안내용/초안</b> 성격의 문서이며,
