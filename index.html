@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>라니MALL 로그인 · 디스코드 봇·서버세팅·로고디자인</title>
+<title>라니MALL · 디스코드 봇·서버세팅·로고 디자인</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="description"
-      content="디스코드 봇 제작, 서버 세팅, 로고 디자인까지 한 번에 맡길 수 있는 라니MALL입니다. 커스텀 봇과 서버 브랜딩으로 커뮤니티 퀄리티를 올려보세요.">
+      content="디스코드 봇 제작, 서버 세팅, 로고 디자인까지 한 번에 맡길 수 있는 라니MALL. 실제 운영 중인 RLNL 게임/공지/출석 봇과 서버 세팅 예시를 보고, 디스코드로 바로 문의하세요.">
 
 <link rel="icon" type="image/png"
       href="https://cdn.discordapp.com/attachments/1083101135096795201/1479323459073867941/apple-touch-icon.png?ex=69ab9ed5&is=69aa4d55&hm=27698736fb541c68520d785517aa103392008f1ffbad142d5ba24a0807ab7973">
@@ -14,18 +14,10 @@
 <style>
 * { box-sizing:border-box; margin:0; padding:0 }
 
-/* ==== 전체 배경 (강도 살짝 다운) ==== */
+/* ==== 배경: 기존 톤 유지 but 살짝 차분하게 ==== */
 body {
   min-height:100vh;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Noto Color Emoji",
-    sans-serif;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
     radial-gradient(circle at top left, rgba(59,130,246,0.16), transparent 55%),
     radial-gradient(circle at bottom right, rgba(236,72,153,0.13), transparent 55%),
@@ -33,494 +25,432 @@ body {
   background-size:180% 180%;
   animation:bgWave 32s ease-in-out infinite;
   color:#e5e7eb;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   padding:20px;
-  position:relative;
-  overflow:hidden;
 }
-
-/* 안개/링은 기존보다 투명도만 살짝 줄임 */
-body::before {
-  content:'';
-  position:fixed;
-  inset:-30%;
-  background:
-    radial-gradient(circle at 0% 20%, rgba(59,130,246,0.28), transparent 55%),
-    radial-gradient(circle at 80% 0%, rgba(45,212,191,0.24), transparent 55%),
-    radial-gradient(circle at 20% 100%, rgba(96,165,250,0.18), transparent 55%);
-  filter:blur(14px);
-  animation:calmNebula 26s ease-in-out infinite;
-  z-index:-2;
-}
-.bg-orbit {
-  position:fixed;
-  width:820px;
-  height:820px;
-  border-radius:50%;
-  background:conic-gradient(
-    from 0deg,
-    rgba(59,130,246,0.0),
-    rgba(59,130,246,0.25),
-    rgba(45,212,191,0.2),
-    rgba(37,99,235,0.24),
-    rgba(59,130,246,0.0)
-  );
-  opacity:0.5;
-  mix-blend-mode:screen;
-  animation:slowOrbit 48s linear infinite;
-  z-index:-1;
-}
-.bg-orbit::before {
-  content:'';
-  position:absolute;
-  inset:130px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
-}
-
 @keyframes bgWave {
   0%   { background-position:0% 50%; }
   50%  { background-position:100% 50%; }
   100% { background-position:0% 50%; }
 }
-@keyframes calmNebula {
-  0%,100% { transform:scale(1) translate(0,0); }
-  50%     { transform:scale(1.06) translate(-18px, 14px); }
-}
-@keyframes slowOrbit {
-  to { transform:rotate(360deg); }
+
+/* 중앙 래핑 */
+.wrap {
+  max-width:980px;
+  margin:0 auto;
 }
 
-/* ==== 카드 ==== */
-.card {
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-width:880px;
-  max-height:560px;
-  background:rgba(15,23,42,0.96);
-  backdrop-filter:blur(22px);
-  border-radius:24px;
-  border:1px solid rgba(148,163,184,0.55);
-  box-shadow:
-    0 24px 70px rgba(15,23,42,0.95),
-    0 0 22px rgba(56,189,248,0.32);
-  display:flex;
-  overflow:hidden;
-}
-
-/* 왼쪽 소개 */
-.card-left {
-  flex:1.1;
-  position:relative;
-  padding:32px 32px 30px;
-  background:
-    radial-gradient(circle at top left, rgba(59,130,246,0.3), transparent 60%),
-    radial-gradient(circle at bottom right, rgba(45,212,191,0.26), transparent 55%),
-    #020617;
-}
-.card-left::before {
-  content:'';
-  position:absolute;
-  inset:-30%;
-  background:radial-gradient(circle at 0% 0%, rgba(248,250,252,0.13), transparent 65%);
-  opacity:0.7;
-}
-.left-inner {
-  position:relative;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.left-brand {
-  font-size:18px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:6px;
-  color:#e5e7eb;
-}
-.left-title {
-  font-size:28px;
-  font-weight:800;
-  line-height:1.25;
-  margin:8px 0 10px;
-  background:linear-gradient(130deg,#38bdf8,#22c55e,#a855f7,#f97316,#38bdf8);
-  background-size:220% 220%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:leftTitleGlow 7s ease-in-out infinite;
-}
-.left-desc {
-  font-size:13px;
-  color:rgba(226,232,240,0.92);
-  max-width:270px;
-}
-.left-tag {
-  align-self:flex-start;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid rgba(226,232,240,0.8);
-  font-size:11px;
-  color:rgba(226,232,240,0.95);
-}
-
-@keyframes leftTitleGlow {
-  0%   { background-position:0% 50%;   text-shadow:0 0 10px rgba(56,189,248,0.3); }
-  50%  { background-position:100% 50%; text-shadow:0 0 18px rgba(45,212,191,0.5); }
-  100% { background-position:0% 50%;   text-shadow:0 0 10px rgba(56,189,248,0.3); }
-}
-
-/* 오른쪽 로그인 */
-.card-right {
-  flex:1;
-  background:rgba(15,23,42,0.98);
-  padding:34px 38px 32px;
-  position:relative;
-  display:flex;
-  align-items:center;
-}
-.card-right::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top right, rgba(59,130,246,0.22), transparent 55%);
-  opacity:0.9;
-}
-.right-inner {
-  position:relative;
-  z-index:2;
-  width:100%;
-}
-
-/* 상단 로고 영역 */
-.logo-line {
-  font-size:13px;
-  color:#9ca3af;
-  margin-bottom:4px;
-}
-.logo-main {
-  font-size:20px;
-  font-weight:700;
-  margin-bottom:6px;
-}
-.subtitle {
-  font-size:12px;
-  margin-bottom:6px;
-  color:#cbd5f5;
-}
-
-/* 네온 안내 문구 */
-.hint {
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:18px;
-  background:linear-gradient(130deg,#38bdf8,#22c55e,#a855f7,#f97316,#38bdf8);
-  background-size:250% 250%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:hintGlow 6s ease-in-out infinite;
-}
-@keyframes hintGlow {
-  0%   { background-position:0% 50%;   text-shadow:0 0 8px rgba(56,189,248,0.45); }
-  50%  { background-position:100% 50%; text-shadow:0 0 16px rgba(45,212,191,0.6); }
-  100% { background-position:0% 50%;   text-shadow:0 0 8px rgba(56,189,248,0.45); }
-}
-
-/* 입력 폼 */
-.form-group { margin-bottom:12px; }
-label {
-  display:block;
-  font-size:12px;
-  color:rgba(209,213,219,0.95);
-  margin-bottom:4px;
-}
-input {
-  width:100%;
-  padding:9px 11px;
-  border-radius:10px;
-  border:1px solid rgba(55,65,81,0.9);
-  background:rgba(15,23,42,0.95);
-  color:#e5e7eb;
-  font-size:13px;
-  outline:none;
-  transition:border-color .2s, box-shadow .2s, background .2s;
-}
-input::placeholder { color:rgba(148,163,184,0.8); }
-input:focus {
-  border-color:#6366f1;
-  box-shadow:0 0 0 1px rgba(99,102,241,0.5);
-  background:rgba(15,23,42,1);
-}
-
-.form-extra {
+/* 상단 헤더 (로고 + 간단 메뉴) */
+.site-header {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:14px;
+  margin-bottom:22px;
 }
-.form-extra a {
-  font-size:11px;
-  color:rgba(129,140,248,0.95);
-  text-decoration:none;
-}
-.form-extra a:hover { text-decoration:underline; }
-
-/* 기본 로그인 버튼 (보조 액션 느낌) */
-.primary-btn {
-  width:100%;
-  padding:9px 18px;
-  border:none;
-  border-radius:10px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  background:#020617;
-  color:#e5e7eb;
-  border:1px solid rgba(75,85,99,0.9);
-  transition:all .2s;
-}
-.primary-btn:hover {
-  background:#111827;
-}
-
-/* 구분선 + Google 버튼 */
-.divider {
+.site-brand {
   display:flex;
   align-items:center;
   gap:10px;
-  margin:18px 0 14px;
 }
-.divider-line {
-  flex:1;
-  height:1px;
-  background:rgba(55,65,81,0.9);
-}
-.divider-text {
-  font-size:11px;
-  color:rgba(148,163,184,0.9);
-}
-
-.google-btn {
-  width:100%;
-  padding:11px 20px;
-  border:none;
-  border-radius:12px;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
-  transition:all .25s;
-  background:linear-gradient(135deg,#3b82f6,#22c55e);
-  color:#fff;
-  box-shadow:0 10px 26px rgba(37,99,235,0.8);
-  position:relative;
+.site-logo {
+  width:32px;
+  height:32px;
+  border-radius:10px;
   overflow:hidden;
+  border:1px solid rgba(148,163,184,0.7);
+  background:#020617;
+}
+.site-logo img {
+  width:100%; height:100%; object-fit:cover;
+}
+.site-title {
   display:flex;
-  align-items:center;
-  justify-content:center;
+  flex-direction:column;
 }
-.google-btn::before {
-  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.33),transparent);
-  transition:left .55s;
+.site-title-main {
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
-.google-btn:hover {
-  transform:translateY(-1px);
-  box-shadow:0 14px 32px rgba(37,99,235,0.95);
-}
-.google-btn:hover::before { left:100%; }
-.google-btn:active { transform:translateY(0); }
-
-.google-icon {
-  width:18px;height:18px;margin-right:8px;display:inline-block;
-  background:linear-gradient(135deg,#fff,#f8f9fa);border-radius:4px;
-  mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25	H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" opacity=".6"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53	H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07	H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>') no-repeat center;
-  -webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25	H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" opacity=".6"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53	H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07	H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>') no-repeat center;
-  mask-size:16px;
+.site-title-sub {
+  font-size:11px;
+  color:#9ca3af;
 }
 
-.loading {
-  display:inline-block;
-  width:16px;height:16px;
-  border:2px solid rgba(255,255,255,0.3);
-  border-radius:50%;
-  border-top-color:#fff;
-  margin-right:8px;
-  animation:spin 1s ease-in-out infinite;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-
-.error {
-  margin-top:10px;
+.site-nav {
+  display:flex;
+  gap:10px;
   font-size:12px;
-  color:#fee2e2;
-  min-height:16px;
+  color:#9ca3af;
+}
+.site-nav a {
+  color:#9ca3af;
+  text-decoration:none;
+}
+.site-nav a:hover {
+  color:#e5e7eb;
 }
 
-/* 모바일 */
-@media (max-width:768px) {
-  body {
-    padding:16px;
-  }
-  .card {
-    max-width:420px;
-    max-height:none;
-    flex-direction:column;
-  }
-  .card-left {
-    display:none;
-  }
-  .card-right {
-    padding:26px 22px 22px;
+/* === Hero 영역: 한 눈에 이해 + CTA === */
+.hero {
+  display:grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap:24px;
+  margin-bottom:28px;
+}
+@media (max-width:800px){
+  .hero {
+    grid-template-columns:1fr;
   }
 }
+
+.hero-main {
+  padding:18px 18px 16px;
+  border-radius:18px;
+  background:rgba(15,23,42,0.96);
+  border:1px solid rgba(55,65,81,0.95);
+  box-shadow:
+    0 22px 60px rgba(15,23,42,0.95),
+    0 0 0 1px rgba(15,23,42,1);
+}
+
+.hero-kicker {
+  font-size:11px;
+  color:#9ca3af;
+  margin-bottom:6px;
+}
+.hero-title {
+  font-size:24px;
+  font-weight:800;
+  line-height:1.35;
+  margin-bottom:8px;
+}
+.hero-title span {
+  background:linear-gradient(135deg,#38bdf8,#22c55e,#a855f7);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub {
+  font-size:13px;
+  color:#cbd5f5;
+  margin-bottom:14px;
+}
+
+/* 서비스 요약 포인트 */
+.hero-points {
+  font-size:13px;
+  color:#e5e7eb;
+  margin-bottom:16px;
+}
+.hero-points li { margin-bottom:4px; }
+
+/* 가격 범위 */
+.hero-price {
+  font-size:12px;
+  color:#9ca3af;
+  margin-bottom:14px;
+}
+
+/* CTA 버튼 */
+.hero-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.btn-main {
+  padding:10px 18px;
+  border-radius:999px;
+  border:none;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:linear-gradient(135deg,#3b82f6,#22c55e);
+  color:#f9fafb;
+  box-shadow:0 12px 28px rgba(37,99,235,0.9);
+  text-decoration:none;
+}
+.btn-main:hover {
+  transform:translateY(-1px);
+  box-shadow:0 16px 34px rgba(37,99,235,1);
+}
+.btn-sub {
+  padding:9px 14px;
+  border-radius:999px;
+  border:1px solid rgba(75,85,99,0.9);
+  background:#020617;
+  color:#e5e7eb;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+  text-decoration:none;
+}
+.btn-sub:hover {
+  background:#111827;
+}
+
+/* Hero 오른쪽: 실제 예시 스냅샷 느낌 블럭 */
+.hero-examples {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.hero-card {
+  padding:12px 13px;
+  border-radius:16px;
+  background:rgba(15,23,42,0.96);
+  border:1px solid rgba(55,65,81,0.95);
+  font-size:12px;
+}
+.hero-card-title {
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:4px;
+}
+.hero-tag-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:4px;
+}
+.hero-tag {
+  font-size:11px;
+  padding:2px 8px;
+  border-radius:999px;
+  background:#020617;
+  border:1px solid rgba(55,65,81,0.9);
+  color:#9ca3af;
+}
+
+/* ==== 서비스 카드 섹션 ==== */
+.section-title {
+  font-size:18px;
+  font-weight:700;
+  margin:10px 0 8px;
+}
+.section-sub {
+  font-size:12px;
+  color:#9ca3af;
+  margin-bottom:14px;
+}
+
+.service-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+@media (max-width:900px){
+  .service-grid { grid-template-columns:1fr; }
+}
+
+.service-card {
+  padding:14px 14px 16px;
+  border-radius:16px;
+  background:rgba(15,23,42,0.98);
+  border:1px solid rgba(55,65,81,0.95);
+  box-shadow:0 16px 40px rgba(15,23,42,0.9);
+  font-size:12px;
+}
+.service-card-title {
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:4px;
+}
+.service-card-price {
+  font-size:12px;
+  color:#a5b4fc;
+  margin-bottom:6px;
+}
+.service-card ul { padding-left:16px; }
+.service-card li { margin-bottom:3px; }
+
+/* ==== 프로세스 / 어떻게 진행되는지 ==== */
+.process-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+@media (max-width:800px){
+  .process-grid { grid-template-columns:1fr; }
+}
+.process-item {
+  padding:10px 12px;
+  border-radius:12px;
+  background:rgba(15,23,42,0.95);
+  border:1px dashed rgba(55,65,81,0.8);
+  font-size:12px;
+}
+.process-step {
+  font-size:11px;
+  color:#9ca3af;
+}
+
+/* ==== 푸터 ==== */
+.footer {
+  margin-top:18px;
+  padding-top:10px;
+  border-top:1px solid rgba(31,41,55,0.9);
+  font-size:11px;
+  color:#6b7280;
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.footer a {
+  color:#9ca3af;
+  text-decoration:none;
+}
+.footer a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
-  <div class="bg-orbit"></div>
+<div class="wrap">
+  <!-- 상단 -->
+  <header class="site-header">
+    <div class="site-brand">
+      <div class="site-logo">
+        <img src="https://cdn.phototourl.com/uploads/2026-02-28-90909391-9783-4299-a370-a3766a19e150.png" alt="라니 로고">
+      </div>
+      <div class="site-title">
+        <div class="site-title-main">RANI MALL</div>
+        <div class="site-title-sub">디스코드 봇 · 서버 세팅 · 로고 디자인</div>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="points.html">포인트/게임 정책</a>
+      <a href="tos.html">이용 약관(안)</a>
+      <a href="bot-v1.html">라니봇 v1</a>
+    </nav>
+  </header>
 
-  <div class="card">
-    <!-- 왼쪽 소개 -->
-    <div class="card-left">
-      <div class="left-inner">
-        <div>
-          <div class="left-brand">RANI MALL</div>
-          <div class="left-title">오늘의<br>라니픽을 만나보세요.</div>
-          <p class="left-desc">
-            디스코드 봇, 서버 세팅, 로고 디자인까지<br>
-            한 번에 의뢰하고 관리해 보세요.
-          </p>
-        </div>
-        <div class="left-tag">24/7 디스코드 · 외주 · 봇 맞춤 서비스</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="hero-kicker">디스코드 커뮤니티·게임 서버 운영자를 위한</div>
+      <h1 class="hero-title">
+        <span>봇 제작 · 서버 세팅 · 로고 디자인</span>을<br>
+        디엠 한 번으로 끝냅니다.
+      </h1>
+      <p class="hero-sub">
+        RLNL 포인트 게임, 공지/출석 올인원 봇, 커스텀 서버 구조까지.<br>
+        지금 실제로 돌고 있는 세팅 그대로, 당신 서버에 맞춰서 옮겨드립니다.
+      </p>
+
+      <ul class="hero-points">
+        <li>· RLNL 게임(말경주·블랙잭·바카라) 봇 + 출석/위로금/공지까지 한 번에 세팅</li>
+        <li>· 서버 구조, 권한, 채널 카테고리 정리까지 “깨끗한 첫판” 서버 세팅</li>
+        <li>· 서버용 로고/배너/역할 아이콘까지 통일감 있게 제작</li>
+      </ul>
+
+      <div class="hero-price">
+        대략 가격대<br>
+        · 간단 디스코드 봇/수정: 3만~<br>
+        · 서버 세팅 패키지: 2만~<br>
+        · 로고/배너 디자인: 1만~ (정확한 금액은 디엠으로 협의)
+      </div>
+
+      <div class="hero-actions">
+        <!-- 여기 디엠/서버 초대 링크로 교체 -->
+        <a href="https://discord.gg/yEym2KZ9BU" target="_blank" rel="noopener noreferrer" class="btn-main">
+          <span>💬 디스코드로 견적 문의</span>
+        </a>
+        <a href="bot-v1.html" class="btn-sub">라니봇 v1 실제 예시 보기</a>
       </div>
     </div>
 
-    <!-- 오른쪽 로그인 -->
-    <div class="card-right">
-      <div class="right-inner">
-        <div class="logo-line">라니MALL 로그인</div>
-        <div class="subtitle">커스텀 봇과 서버 브랜딩을 한 번에 관리하세요.</div>
-        <div class="hint">지금은 Google 로그인으로만 접속할 수 있습니다.</div>
-
-        <form id="email-login-form">
-          <div class="form-group">
-            <label for="email">이메일 (준비 중)</label>
-            <input id="email" type="email" placeholder="example@domain.com" autocomplete="email">
-          </div>
-          <div class="form-group">
-            <label for="password">비밀번호</label>
-            <input id="password" type="password" placeholder="비밀번호" autocomplete="current-password">
-          </div>
-
-          <div class="form-extra">
-            <span style="font-size:11px;color:#6b7280;">이메일 로그인은 추후 지원 예정입니다.</span>
-            <a href="#">비밀번호를 잊으셨나요?</a>
-          </div>
-
-          <button type="submit" class="primary-btn">이메일 로그인 (준비 중)</button>
-        </form>
-
-        <div class="divider">
-          <div class="divider-line"></div>
-          <div class="divider-text">또는</div>
-          <div class="divider-line"></div>
+    <div class="hero-examples">
+      <div class="hero-card">
+        <div class="hero-card-title">RLNL · 라니봇 v1 실제 운영 중</div>
+        <p>
+          공지 모달 + RLNL 포인트 게임 + 출석/위로금 기능이 모두 들어간<br>
+          “올인원 봇”을 지금도 디스코드 서버에서 굴리고 있습니다.
+        </p>
+        <div class="hero-tag-row">
+          <span class="hero-tag">공지 모달</span>
+          <span class="hero-tag">포인트 게임</span>
+          <span class="hero-tag">출석/레벨</span>
         </div>
-
-        <button id="google-login-btn" class="google-btn">
-          <span class="google-icon" aria-hidden="true"></span>
-          <span id="btn-text">Google로 계속</span>
-        </button>
-
-        <div id="error-box" class="error"></div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-title">실제 서버 세팅 예시</div>
+        <p>
+          새 서버 오픈용 채널/권한 구조, 자동 역할 부여, 로그·티켓·게임 채널까지<br>
+          “마인/게임/커뮤니티” 서버에 맞춰 템플릿처럼 세팅해 드립니다.
+        </p>
+        <div class="hero-tag-row">
+          <span class="hero-tag">권한·역할 구조</span>
+          <span class="hero-tag">카테고리 정리</span>
+          <span class="hero-tag">봇 연동</span>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- 음악 토글은 그대로 유지 -->
-  <button id="music-toggle" style="
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    padding:6px 12px;
-    font-size:12px;
-    border-radius:999px;
-    border:none;
-    background:rgba(15,23,42,0.85);
-    color:#e5e7eb;
-    cursor:pointer;
-    box-shadow:0 10px 24px rgba(15,23,42,0.8);
-    z-index:10;
-  ">
-    🔈 음악 켜기
-  </button>
+  <!-- 서비스 카드 -->
+  <section>
+    <h2 class="section-title">이런 작업을 주로 합니다</h2>
+    <p class="section-sub">아래는 자주 요청되는 패키지 예시입니다. 정확한 범위와 금액은 디스코드로 편하게 이야기 주면 맞춰 드립니다.</p>
 
-  <audio id="bg-music" loop>
-    <source src="https://gay-salmon-iv4pvv4oop.edgeone.app/producesplatinum-vlog-hip-hop-483574_[cut_11sec].mp3" type="audio/mpeg">
-    브라우저가 오디오를 지원하지 않습니다.
-  </audio>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-card-title">① 디스코드 봇 제작/수정</div>
+        <div class="service-card-price">기본 3만~ · RLNL 연동/게임/자동화는 협의</div>
+        <ul>
+          <li>공지 모달, 출석/위로금, 포인트 시스템</li>
+          <li>서버 로그, 자동 역할, 티켓/문의 처리</li>
+          <li>기존 봇 수정·기능 추가도 가능 (소스 상황에 따라)</li>
+        </ul>
+      </div>
 
-<script type="module">
-import { auth } from "./firebase.js";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+      <div class="service-card">
+        <div class="service-card-title">② 서버 세팅 패키지</div>
+        <div class="service-card-price">기본 2만~ 서버 규모·봇 종류에 따라 변동</div>
+        <ul>
+          <li>채널/카테고리/권한 구조 전체 설계</li>
+          <li>봇 연결 및 기본 명령어 셋업</li>
+          <li>운영진/유저용 안내 채널 템플릿 제공</li>
+        </ul>
+      </div>
 
-onAuthStateChanged(auth, user => {
-  if (user) window.location.href = "home.html";
-});
+      <div class="service-card">
+        <div class="service-card-title">③ 로고/배너/역할 아이콘</div>
+        <div class="service-card-price">로고 1만~ / 패키지 2.5만~</div>
+        <ul>
+          <li>서버 로고, 배너, 초대 링크 썸네일</li>
+          <li>역할 아이콘, 카테고리용 이모지 스타일 통일</li>
+          <li>봇/웹 페이지용 간단 썸네일도 제작 가능</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-// 이메일/비밀번호 로그인은 아직 미구현
-const emailForm = document.getElementById("email-login-form");
-const errorBox = document.getElementById("error-box");
-emailForm.addEventListener("submit", e => {
-  e.preventDefault();
-  errorBox.textContent = "현재는 Google 로그인만 지원합니다.";
-});
+  <!-- 프로세스 -->
+  <section style="margin-top:22px;">
+    <h2 class="section-title">진행 방식은 이렇게</h2>
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="process-step">STEP 1</div>
+        <div><strong>디스코드로 간단히 문의</strong><br>원하는 기능/서버 용도/대략 예산만 말해 주세요.</div>
+      </div>
+      <div class="process-item">
+        <div class="process-step">STEP 2</div>
+        <div><strong>범위·견적 합의</strong><br>필요한 기능 리스트·작업 범위를 정리해서 금액/기간을 정합니다.</div>
+      </div>
+      <div class="process-item">
+        <div class="process-step">STEP 3</div>
+        <div><strong>작업 · 테스트 · 적용</strong><br>테스트 서버/실서버에 적용 후, 피드백 반영해서 마무리합니다.</div>
+      </div>
+    </div>
+  </section>
 
-const provider = new GoogleAuthProvider();
-const loginBtn = document.getElementById("google-login-btn");
-const btnText = document.getElementById("btn-text");
-
-loginBtn.addEventListener("click", async () => {
-  loginBtn.disabled = true;
-  errorBox.textContent = "";
-  btnText.innerHTML = '<span class="loading"></span>로그인 중...';
-
-  try {
-    const result = await signInWithPopup(auth, provider);
-    if (result.user) window.location.href = "home.html";
-  } catch (err) {
-    console.error("로그인 오류:", err);
-    errorBox.textContent = "로그인 실패: " + (err.message || "다시 시도해 주세요.");
-    loginBtn.disabled = false;
-    btnText.textContent = "Google로 계속";
-  }
-});
-
-// 배경 음악 토글
-const bgMusic = document.getElementById("bg-music");
-const musicToggle = document.getElementById("music-toggle");
-
-if (bgMusic && musicToggle) {
-  musicToggle.addEventListener("click", async () => {
-    if (bgMusic.paused) {
-      try {
-        await bgMusic.play();
-        musicToggle.textContent = "🔇 음악 끄기";
-      } catch (e) {
-        console.error("음악 재생 오류:", e);
-      }
-    } else {
-      bgMusic.pause();
-      musicToggle.textContent = "🔈 음악 켜기";
-    }
-  });
-}
-</script>
+  <!-- 푸터 -->
+  <footer class="footer">
+    <span>© 2026 라니MALL · RLNL Digital Service</span>
+    <span>디스코드 문의: soyugwon (예시) · <a href="points.html">포인트/게임 정책</a> · <a href="tos.html">약관(안)</a></span>
+  </footer>
+</div>
 </body>
 </html>
