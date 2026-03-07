@@ -119,8 +119,11 @@ body {
   }
 }
 
+/* 왼쪽 메인 카드 - 버튼을 카드 맨 아래로 */
 .hero-main {
-  position:relative; /* 버튼을 카드 안 아래쪽에 자연스럽게 위치시키기 위함 */
+  display:flex;
+  flex-direction:column;
+  position:relative;
   padding:18px 18px 20px;
   border-radius:18px;
   background:rgba(15,23,42,0.96);
@@ -128,6 +131,7 @@ body {
   box-shadow:
     0 22px 60px rgba(15,23,42,0.95),
     0 0 0 1px rgba(15,23,42,1);
+  min-height:320px;
 }
 
 .hero-kicker {
@@ -167,13 +171,15 @@ body {
   margin-bottom:14px;
 }
 
-/* 견적/로그인 버튼: 카드 아래쪽에서 살짝 위 */
+/* 견적문의 / 구글 로그인 버튼: 카드 안 맨 아래 */
 .hero-actions {
   display:flex;
   flex-wrap:wrap;
   gap:10px;
   align-items:center;
-  margin-top:6px;
+  margin-top:auto;           /* 위 내용 밀어 올리고, 이 블럭은 카드 아래 */
+  padding-top:12px;
+  border-top:1px solid rgba(30,41,59,0.8);
 }
 
 /* 두 버튼 크기·색 통일 */
@@ -543,7 +549,8 @@ async function handleGoogleLogin() {
     if (result.user) window.location.href = "home.html";
   } catch (err) {
     console.error("로그인 오류:", err);
-    errorBox.textContent = "로그인 실패: " + (err.message || "다시 시도해 주세요.";
+    errorBox.textContent =
+      "로그인 실패: " + (err && err.message ? err.message : "다시 시도해 주세요.");
     loginBtnTop.disabled = false;
     btnTextTop.textContent = "Google로 계속";
   }
