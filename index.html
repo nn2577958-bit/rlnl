@@ -76,29 +76,31 @@ body {
   color:#9ca3af;
 }
 
+/* 상단 네비 */
 .site-nav {
   display:flex;
-  gap:10px;
+  gap:14px;
   font-size:12px;
   color:#9ca3af;
 }
 .site-nav a {
-  color:#9ca3af;
+  color:#d1d5db;
   text-decoration:none;
-  padding:6px 10px;
+  padding:4px 8px;
   border-radius:999px;
+  font-weight:400;
 }
 .site-nav a:hover {
   color:#e5e7eb;
   background:rgba(15,23,42,0.9);
 }
 
-/* 라니봇 v1 메인 허브 강조 */
+/* 라니봇 v1 메인 허브 강조 (조금 덜 진하게) */
 .nav-main-bot {
-  background:linear-gradient(135deg,#3b82f6,#22c55e);
+  background:linear-gradient(135deg,#1e40af,#16a34a);
   color:#f9fafb;
-  font-weight:600;
-  box-shadow:0 0 0 1px rgba(15,23,42,0.9), 0 8px 18px rgba(37,99,235,0.8);
+  font-weight:500;
+  box-shadow:0 0 0 1px rgba(15,23,42,0.9), 0 6px 12px rgba(37,99,235,0.7);
 }
 .nav-main-bot:hover {
   filter:brightness(1.05);
@@ -153,7 +155,7 @@ body {
   font-size:13px;
   color:#e5e7eb;
   margin-bottom:16px;
-  list-style-type:none;   /* 기본 불릿 제거 */
+  list-style-type:none;
   padding-left:0;
 }
 .hero-points li { margin-bottom:4px; }
@@ -161,16 +163,22 @@ body {
 .hero-price {
   font-size:12px;
   color:#9ca3af;
-  margin-bottom:14px;
+  margin-bottom:10px;
 }
 
+/* 견적/로그인 버튼 줄 정렬 */
 .hero-actions {
   display:flex;
   flex-wrap:wrap;
   gap:10px;
+  align-items:center;
+  margin-top:4px;
+}
+.hero-actions > * {
+  flex-shrink:0;
 }
 
-/* 디스코드 견적 버튼 */
+/* 디스코드 견적 버튼 (그라데이션) */
 .btn-main {
   padding:10px 18px;
   border-radius:999px;
@@ -191,20 +199,21 @@ body {
   box-shadow:0 16px 34px rgba(37,99,235,1);
 }
 
-/* 상단 Google 버튼 */
+/* Google 버튼도 살짝 강조 */
 .google-btn-top {
   padding:9px 16px;
   border-radius:999px;
   border:1px solid rgba(75,85,99,0.9);
-  background:#020617;
+  background:rgba(15,23,42,0.95);
   color:#e5e7eb;
   font-size:13px;
-  font-weight:600;
+  font-weight:500;
   cursor:pointer;
   display:inline-flex;
   align-items:center;
   gap:8px;
   text-decoration:none;
+  box-shadow:0 8px 18px rgba(15,23,42,0.9);
 }
 .google-btn-top:hover {
   background:#111827;
@@ -416,7 +425,6 @@ body {
         <a href="https://discord.gg/yEym2KZ9BU" target="_blank" rel="noopener noreferrer" class="btn-main">
           <span>💬 디스코드로 견적 문의</span>
         </a>
-        <!-- 상단 Google 계속하기 버튼 -->
         <button id="google-login-btn-top" class="google-btn-top" type="button">
           <img class="google-icon-top"
                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
