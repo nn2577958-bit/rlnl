@@ -85,9 +85,23 @@ body {
 .site-nav a {
   color:#9ca3af;
   text-decoration:none;
+  padding:6px 10px;
+  border-radius:999px;
 }
 .site-nav a:hover {
   color:#e5e7eb;
+  background:rgba(15,23,42,0.9);
+}
+
+/* 라니봇 v1 메인 허브 강조 */
+.nav-main-bot {
+  background:linear-gradient(135deg,#3b82f6,#22c55e);
+  color:#f9fafb;
+  font-weight:600;
+  box-shadow:0 0 0 1px rgba(15,23,42,0.9), 0 8px 18px rgba(37,99,235,0.8);
+}
+.nav-main-bot:hover {
+  filter:brightness(1.05);
 }
 
 /* Hero 영역 */
@@ -139,6 +153,8 @@ body {
   font-size:13px;
   color:#e5e7eb;
   margin-bottom:16px;
+  list-style-type:none;   /* 기본 불릿 제거 */
+  padding-left:0;
 }
 .hero-points li { margin-bottom:4px; }
 
@@ -231,6 +247,19 @@ body {
   background:#020617;
   border:1px solid rgba(55,65,81,0.9);
   color:#9ca3af;
+}
+
+/* 카드 안 이미지 */
+.hero-image {
+  margin-top:8px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid rgba(55,65,81,0.9);
+}
+.hero-image img {
+  display:block;
+  width:100%;
+  height:auto;
 }
 
 /* 서비스 카드 */
@@ -354,7 +383,7 @@ body {
     <nav class="site-nav">
       <a href="points.html">포인트/ 정책</a>
       <a href="tos.html">이용 약관(안)</a>
-      <a href="bot-v1.html">라니봇 v1</a>
+      <a href="bot-v1.html" class="nav-main-bot">라니봇 v1 패널</a>
     </nav>
   </header>
 
@@ -371,9 +400,9 @@ body {
       </p>
 
       <ul class="hero-points">
-        <li>· 모든 봇 + 출석/위로금/공지까지 한 번에 세팅</li>
-        <li>· 서버 구조, 권한, 채널 카테고리 정리까지 “깨끗한 첫판” 서버 세팅</li>
-        <li>· 서버용 로고/배너/역할 아이콘까지 통일감 있게 제작</li>
+        <li>모든 봇 + 출석/위로금/공지까지 한 번에 세팅</li>
+        <li>서버 구조, 권한, 채널 카테고리 정리까지 “깨끗한 첫판” 서버 세팅</li>
+        <li>서버용 로고/배너/역할 아이콘까지 통일감 있게 제작</li>
       </ul>
 
       <div class="hero-price">
@@ -387,7 +416,7 @@ body {
         <a href="https://discord.gg/yEym2KZ9BU" target="_blank" rel="noopener noreferrer" class="btn-main">
           <span>💬 디스코드로 견적 문의</span>
         </a>
-        <!-- 상단 Google 계속하기 버튼 (유일한 로그인 버튼) -->
+        <!-- 상단 Google 계속하기 버튼 -->
         <button id="google-login-btn-top" class="google-btn-top" type="button">
           <img class="google-icon-top"
                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
@@ -411,7 +440,12 @@ body {
           <span class="hero-tag">포인트 게임</span>
           <span class="hero-tag">출석/레벨</span>
         </div>
+        <div class="hero-image">
+          <img src="https://cdn.discordapp.com/attachments/1463400037416439869/1479824232199229662/OIP.JPG?ex=69ad7136&is=69ac1fb6&hm=1c0e0b5b6deb1367fb7ddf571b91f9ed112afd6b90cd04e958086d31e7562058&"
+               alt="라니봇 v1 패널 예시 화면">
+        </div>
       </div>
+
       <div class="hero-card">
         <div class="hero-card-title">실제 서버 세팅 예시</div>
         <p>
@@ -519,7 +553,7 @@ async function handleGoogleLogin() {
     if (result.user) window.location.href = "home.html";
   } catch (err) {
     console.error("로그인 오류:", err);
-    errorBox.textContent = "로그인 실패: " + (err.message || "다시 시도해 주세요.");
+    errorBox.textContent = "로그인 실패: " + (err.message || "다시 시도해 주세요.";
     loginBtnTop.disabled = false;
     btnTextTop.textContent = "Google로 계속";
   }
