@@ -415,7 +415,8 @@ body {
       <h1 id="welcome">로그인 확인 중...</h1>
       
       <div class="notice">
-        <b>안내</b> · 포인트로만 구매 가능한 상품입니다. 디스코드 문의를 통해 배송 정보 등을 전달해 주세요.
+        <b>안내</b> · 포인트로만 구매 가능한 디지털 서비스 상품입니다. 디스코드 문의를 통해 서버 정보/원하는 작업 내용을 전달해 주세요.<br>
+        <b>서비스 제공 기간</b> · 결제(포인트 충전) 완료 후 디스코드 문의를 통해 즉시 이용 절차가 진행되며, 작업 범위에 따라 통상 1~3일 이내, 최대 7일 이내 순차적으로 제공됩니다.
       </div>
 
       <!-- 대표 서비스 요약 섹션 -->
@@ -486,7 +487,7 @@ body {
 </div>
 
 <!-- 포트원(아임포트) JS SDK - KG 이니시스 결제용 -->
-<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script> <!-- [web:606][web:610] -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script> <!-- [web:18] -->
 
 <script type="module">
 import { auth, db } from "./firebase.js";
@@ -727,17 +728,17 @@ chargeBtn?.addEventListener("click", async () => {
   }
 
   // TODO: 여기를 네 포트원 가맹점 식별코드로 변경
-  IMP.init("imp47048402");  // [web:606][web:610]
+  IMP.init("imp47048402");
 
   const merchantUid = "rlnl_" + Date.now();
 
   IMP.request_pay(
     {
-      pg: "html5_inicis",              // KG 이니시스
+      pg: "html5_inicis",
       pay_method: "card",
       merchant_uid: merchantUid,
       name: "라니MALL 포인트 충전",
-      amount: amount,                  // 결제 금액 (원)
+      amount: amount,
       buyer_email: user.email,
       buyer_name: nickname,
     },
@@ -751,7 +752,7 @@ chargeBtn?.addEventListener("click", async () => {
         const latestSnap = await getDoc(userRef);
         const latestData = latestSnap.data() || {};
         const currentPoints = latestData.points ?? 0;
-        const newPoints = currentPoints + amount; // 1원 = 1포인트
+        const newPoints = currentPoints + amount;
 
         await updateDoc(userRef, { points: newPoints });
 
