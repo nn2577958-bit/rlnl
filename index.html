@@ -471,8 +471,7 @@ body {
 </head>
 <body>
 <div class="wrap">
-  <!-- 기존 내용 그대로 -->
-  ... (위에서 준 그대로라 생략 가능, 실제 파일엔 전부 유지) ...
+  <!-- 여기 안에는 네가 원래 쓰던 메인 컨텐츠 그대로 (상품 카드 등) 넣으면 됨 -->
 </div>
 
 <!-- 진입 모달 -->
@@ -510,25 +509,24 @@ body {
 import { auth } from "./firebase.js";
 import {
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-const provider = new GoogleAuthProvider();
+const provider    = new GoogleAuthProvider();
 const loginBtnTop = document.getElementById("google-login-btn-top");
-const errorBox = document.getElementById("error-box");
-const btnTextTop = document.getElementById("btn-text-top");
+const errorBox    = document.getElementById("error-box");
+const btnTextTop  = document.getElementById("btn-text-top");
 
-// 1차: 로그인만 하고, 이동은 안 함
-async function handleGoogleLoginOnly() {
+// 원래 구조: 로그인 성공하면 바로 HOME 이동
+async function handleGoogleLogin() {
   loginBtnTop.disabled = true;
   errorBox.textContent = "";
   btnTextTop.innerHTML = '<span class="loading"></span>로그인 중...';
 
   try {
-    await signInWithPopup(auth, provider);
-    // 여기서는 페이지 이동 X → index에 그대로 머무름
-    btnTextTop.textContent = "Google로 계속";
-    loginBtnTop.disabled = false;
+    const result = await signInWithPopup(auth, provider);
+    if (result.user) window.location.href = "home.html";
   } catch (err) {
     console.error("로그인 오류:", err);
     errorBox.textContent =
@@ -538,40 +536,27 @@ async function handleGoogleLoginOnly() {
   }
 }
 
-// 메인 카드 버튼: 이미 로그인된 상태라고 가정하고 HOME 이동만 담당
-async function goHomeAfterLogin() {
-  try {
-    const user = auth.currentUser;
-    if (!user) {
-      errorBox.textContent = "먼저 상단 안내에서 Google 로그인을 완료해 주세요.";
-      return;
-    }
-    window.location.href = "home.html";
-  } catch (e) {
-    console.error(e);
-  }
-}
+loginBtnTop.addEventListener("click", handleGoogleLogin);
 
-// 상단 Google 버튼은 "HOME으로 가기" 역할로 변경
-loginBtnTop.addEventListener("click", goHomeAfterLogin);
-
-// ==== 진입 모달 동작 ====
+// 진입 모달: Google => 같은 로그인 함수 재사용, 일반 => login.html
 const entryOverlay = document.getElementById("entry-overlay");
 const entryGoogle  = document.getElementById("entry-google");
 const entryNormal  = document.getElementById("entry-normal");
 
-// 모달의 "Google 계정으로 계속" => 로그인만 수행
 entryGoogle.addEventListener("click", async () => {
-  await handleGoogleLoginOnly();
-  entryOverlay.style.display = "none";
+  await handleGoogleLogin();
 });
 
-// 일반 로그인 => login.html 로 이동
 entryNormal.addEventListener("click", () => {
   window.location.href = "login.html";
 });
 
-// onAuthStateChanged 없음: index에서는 자동 리다이렉트 안 함
+// 원래처럼: 이미 로그인된 상태로 index 접근시 바로 home.html 로 튕기고 싶으면 이것도 다시 살려
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "home.html";
+  }
+});
 </script>
 </body>
 </html>
