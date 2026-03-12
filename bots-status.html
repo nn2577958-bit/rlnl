@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>라니 디지털 - 봇 상태</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      margin: 0;
+    }
+    header {
+      border-bottom: 1px solid #111827;
+      background: #020617dd;
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    h1 {
+      font-size: 26px;
+      margin: 0 0 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h1 span.logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55eaa;
+    }
+    .sub {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .updated {
+      font-size: 11px;
+      color: #6b7280;
+    }
+    main {
+      padding: 16px 0 32px 0;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .filter-btn {
+      border-radius: 999px;
+      border: 1px solid #1f2933;
+      background: #020617;
+      color: #9ca3af;
+      font-size: 12px;
+      padding: 4px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .filter-btn.active {
+      background: #111827;
+      color: #e5e7eb;
+      border-color: #22c55e55;
+    }
+    .filter-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+    .dot-online { background: #22c55e; }
+    .dot-offline { background: #ef4444; }
+    .dot-maintenance { background: #f97316; }
+    .dot-testing { background: #0ea5e9; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: radial-gradient(circle at top left, #0b1120, #020617 60%);
+      border-radius: 14px;
+      border: 1px solid #111827;
+      padding: 14px 14px 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.04;
+      background: radial-gradient(circle at top right, #22c55e, transparent 60%);
+      pointer-events: none;
+    }
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+    .badge-online {
+      background: #16a34a22;
+      color: #4ade80;
+    }
+    .badge-online span.dot { background: #22c55e; }
+    .badge-offline {
+      background: #b91c1c22;
+      color: #fca5a5;
+    }
+    .badge-offline span.dot { background: #ef4444; }
+    .badge-maintenance {
+      background: #f9731622;
+      color: #fed7aa;
+    }
+    .badge-maintenance span.dot { background: #f97316; }
+    .badge-testing {
+      background: #0ea5e922;
+      color: #7dd3fc;
+    }
+    .badge-testing span.dot { background: #0ea5e9; }
+
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .tag {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .desc {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid #111827;
+    }
+    .pill span {
+      color: #e5e7eb;
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 22px; }
+      .wrap { padding-inline: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1><span class="logo-dot"></span>라니 디지털 봇 상태</h1>
+      <div class="sub">RLNL 계열 디스코드 봇의 현재 운영 상태를 한눈에 확인할 수 있습니다.</div>
+      <div class="updated" id="updated-text"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="online">
+          <span class="filter-dot dot-online"></span> Online
+        </button>
+        <button class="filter-btn" data-filter="maintenance">
+          <span class="filter-dot dot-maintenance"></span> Maintenance
+        </button>
+        <button class="filter-btn" data-filter="testing">
+          <span class="filter-dot dot-testing"></span> Testing
+        </button>
+        <button class="filter-btn" data-filter="offline">
+          <span class="filter-dot dot-offline"></span> Offline
+        </button>
+      </div>
+
+      <div id="bots-grid" class="grid"></div>
+    </div>
+  </main>
+
+  <script>
+    const STATUS_LABEL = {
+      online: "ONLINE",
+      offline: "OFFLINE",
+      maintenance: "MAINTENANCE",
+      testing: "TESTING"
+    };
+
+    const CATEGORY_LABEL = {
+      game: "게임 / 이벤트",
+      utility: "유틸리티",
+      security: "보안 / 감지",
+      music: "뮤직",
+      shop: "상점 / 결제",
+      bank: "포인트 / 은행",
+      etc: "기타"
+    };
+
+    const UPDATED_TEXT = document.getElementById("updated-text");
+    UPDATED_TEXT.textContent = "마지막 갱신: " + new Date().toLocaleString("ko-KR");
+
+    function badgeClass(status) {
+      switch (status) {
+        case "online": return "badge badge-online";
+        case "offline": return "badge badge-offline";
+        case "maintenance": return "badge badge-maintenance";
+        case "testing": return "badge badge-testing";
+        default: return "badge";
+      }
+    }
+
+    let allBots = [];
+
+    function renderBots(filter = "all") {
+      const grid = document.getElementById("bots-grid");
+      grid.innerHTML = "";
+
+      const list = allBots.filter(bot => {
+        if (filter === "all") return true;
+        return bot.status === filter;
+      });
+
+      list.forEach(bot => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const inner = document.createElement("div");
+        inner.className = "card-inner";
+
+        const badge = document.createElement("div");
+        badge.className = badgeClass(bot.status);
+        badge.innerHTML = `<span class="dot"></span>${STATUS_LABEL[bot.status] || bot.status.toUpperCase()}`;
+
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = bot.name;
+
+        const tag = document.createElement("div");
+        tag.className = "tag";
+        const cat = CATEGORY_LABEL[bot.category] || "기타";
+        tag.textContent = cat;
+
+        const desc = document.createElement("div");
+        desc.className = "desc";
+        desc.textContent = bot.desc || "";
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.innerHTML = `
+          <div class="pill">ID: <span>${bot.id}</span></div>
+          <div>${bot.note || ""}</div>
+        `;
+
+        inner.appendChild(badge);
+        inner.appendChild(name);
+        inner.appendChild(tag);
+        inner.appendChild(desc);
+        inner.appendChild(meta);
+        card.appendChild(inner);
+        grid.appendChild(card);
+      });
+    }
+
+    // bots.json 에서 데이터 불러오기 (같은 폴더에 두면 됨)
+    fetch("bots.json")
+      .then(res => res.json())
+      .then(data => {
+        allBots = data;
+        renderBots("all");
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("bots-grid").innerHTML =
+          "<div style='color:#f87171;font-size:13px;'>bots.json 을 불러오지 못했습니다. 파일 위치를 확인하세요.</div>";
+      });
+
+    // 필터 버튼 이벤트
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter || "all";
+      renderBots(filter);
+    });
+  </script>
+</body>
+</html>
