@@ -493,30 +493,6 @@
       box-shadow: 0 0 8px rgba(129,140,248,0.8);
     }
 
-    .pill-updated {
-      font-size: 0.75rem;
-      opacity: 0.95;
-    }
-
-    .pill-updated span.dot {
-      background: rgba(148,163,184,0.85);
-    }
-
-    .card-footer-right {
-      font-size: 0.76rem;
-      opacity: 0.94;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-footer-right span.dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 999px;
-      background: rgba(148,163,184,0.85);
-    }
-
     .footer-note {
       margin-top: 12px;
       font-size: 0.74rem;
@@ -687,14 +663,6 @@
                   <span class="dot"></span>
                   <span>${bot.category || "기타"}</span>
                 </div>
-                <div class="pill pill-updated">
-                  <span class="dot"></span>
-                  <span>${bot.updated || "업데이트 정보 없음"}</span>
-                </div>
-              </div>
-              <div class="card-footer-right">
-                <span class="dot"></span>
-                <span>${bot.id || ""}</span>
               </div>
             </div>
           `;
