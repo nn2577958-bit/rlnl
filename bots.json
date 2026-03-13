@@ -1,7 +1,7 @@
 [
   {
     "id": "game",
-    "name": "🎮 RLNL 게임 봇",
+    "name": "🎮 게임봇",
     "status": "online",
     "category": "game",
     "description": "게임·이벤트 진행"
@@ -14,36 +14,36 @@
     "description": "채널·서버 백업"
   },
   {
-    "id": "detect",
-    "name": "🛡️ 감지봇",
+    "id": "deploy",
+    "name": "🧪 배포용봇",
     "status": "online",
-    "category": "security",
-    "description": "로그·이상 행위 감지"
+    "category": "utility",
+    "description": "테스트/배포 전용"
   },
   {
     "id": "coin",
-    "name": "🪙 코인 봇",
+    "name": "🪙 코인봇",
     "status": "online",
     "category": "utility",
     "description": "코인 관련 유틸"
   },
   {
     "id": "coinprice",
-    "name": "📈 코인 시세 봇",
+    "name": "📈 코인시세봇",
     "status": "online",
     "category": "utility",
-    "description": "실시간 시세 조회"
+    "description": "실시간 코인 시세 조회"
   },
   {
-    "id": "v1",
-    "name": "🧪 v1 배포용 봇",
+    "id": "ticket",
+    "name": "🎫 티켓봇",
     "status": "online",
-    "category": "utility",
-    "description": "테스트/배포용"
+    "category": "support",
+    "description": "티켓·문의 관리"
   },
   {
     "id": "music",
-    "name": "🎵 뮤직 봇",
+    "name": "🎵 뮤직봇",
     "status": "online",
     "category": "music",
     "description": "음악 재생"
@@ -54,6 +54,13 @@
     "status": "online",
     "category": "shop",
     "description": "상품/라이선스 판매"
+  },
+  {
+    "id": "price",
+    "name": "💹 시세봇",
+    "status": "online",
+    "category": "utility",
+    "description": "다양한 시세 조회"
   },
   {
     "id": "bank",
@@ -75,5 +82,12 @@
     "status": "online",
     "category": "security",
     "description": "사기 제보/공개"
+  },
+  {
+    "id": "manage",
+    "name": "📡 웹훅·감시·배너봇",
+    "status": "online",
+    "category": "utility",
+    "description": "웹훅 공지, 감시 로그, 배너 자동 교체"
   }
 ]
