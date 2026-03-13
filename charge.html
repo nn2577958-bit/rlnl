@@ -1,17 +1,167 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <title>포인트 충전 (테스트)</title>
+  <meta charset="utf-8" />
+  <title>포인트 충전</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1120;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #020617;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 24px 28px 28px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.08);
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    input {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 10px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.6);
+    }
+    .field {
+      margin-bottom: 14px;
+    }
+    .hint {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px 0;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #f9fafb;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.6);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+    }
+    .button:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.75);
+    }
+    .button:active {
+      transform: translateY(1px);
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.6);
+    }
+    .amount-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .amount-row span {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+      font-size: 11px;
+      margin-bottom: 16px;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+    }
+    .footer-text {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-  디스코드 ID:
-  <input id="discordId" placeholder="예: 713675224356487220"><br><br>
+  <div class="card">
+    <div class="title">포인트 충전</div>
+    <div class="subtitle">디스코드 ID와 충전 금액을 입력하고, 결제를 진행해 주세요.</div>
 
-  금액:
-  <input id="amount" type="number" value="1000"><br><br>
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>KG 이니시스 · 카드 결제</span>
+    </div>
 
-  <button onclick="pay()">결제하기 (테스트)</button>
+    <div class="field">
+      <label for="discordId">디스코드 ID</label>
+      <input
+        id="discordId"
+        placeholder="예: 713675224356487220"
+        autocomplete="off"
+      />
+      <div class="hint">결제 후, 이 ID 기준으로 잔액이 충전됩니다.</div>
+    </div>
+
+    <div class="field">
+      <label for="amount">충전 금액 (원)</label>
+      <div class="amount-row">
+        <input
+          id="amount"
+          type="number"
+          value="1000"
+          min="100"
+          step="100"
+        />
+        <span>KRW</span>
+      </div>
+      <div class="hint">최소 100원부터 100원 단위로 입력할 수 있습니다.</div>
+    </div>
+
+    <button class="button" onclick="pay()">결제하기</button>
+
+    <div class="footer-text">
+      결제 진행 시 포트원 · KG 이니시스의 이용약관에 동의한 것으로 간주됩니다.
+    </div>
+  </div>
 
   <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
   <script>
@@ -31,11 +181,11 @@
       try {
         const response = await PortOne.requestPayment({
           storeId: "store-16f9ad0b-fe2e-4c30-89d9-65943e891642",
-          channelKey: "channel-key-abc196b1-4a38-4fcd-9f48-ba2e5df74326",
-          isTestChannel: true,
+          channelKey: "channel-key-72dd528f-1c37-407b-b5a7-40faa63f46ce",
+          // isTestChannel: true, // 실연동 시 사용 안 함
 
           paymentId: "order-" + Date.now(),
-          orderName: "포인트 충전 (테스트)",
+          orderName: "포인트 충전",
           totalAmount: amount,
           currency: "KRW",
           payMethod: "CARD",
@@ -44,7 +194,7 @@
             discord_id: discordId
           },
 
-          redirectUrl: "https://example.com/charge-complete.html"
+          redirectUrl: "https://mall.rani-mall.xyz/charge-complete"
         });
 
         console.log("결제 응답:", response);
